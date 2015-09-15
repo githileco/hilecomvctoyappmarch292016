@@ -1,0 +1,215 @@
+﻿@using System.Collections;
+@using System.Collections.Generic;
+@using Newtonsoft.Json;
+@model HiLToysViewModel.OrderViewModel
+@{
+    ViewBag.Title = "Order Entry Detail";
+
+    ArrayList orderDetails = new ArrayList();
+
+    foreach (var item in Model.OrderDetailProductResults)
+    {
+        var orderDetail = new
+        {
+            ProductID = item.ProductID,
+            ProductName = item.ProductName,
+            Quantity = item.Quantity,
+            UnitPrice = item.UnitPrice,
+            QuantityPerUnit = item.QuantityPerUnit,
+            Discount = item.Discount
+
+
+
+        };
+
+        orderDetails.Add(orderDetail);
+    }
+
+   
+}
+
+<h4>Order Entry Detail</h4>
+
+<div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Order Number:&nbsp;</div>
+<div style="float:left; width:150px; height:25px; font-weight:bold; ">&nbsp;@Model.OrderDetailProductResults[0].OrderID</div>
+<div style="float:left; width:150px; height:25px; text-align:right; " class="field-label">Customer ID:&nbsp;</div>
+<div style="float:left; width:150px; height:25px; ">&nbsp;@Model.OrderDetailProductResults[0].CustomerID</div>
+
+<div style="clear:both;"></div>
+
+<div style="float:left; width:150px; text-align:right; height:25px;" class="field-label">Order Date:&nbsp;</div>
+<div style="float:left; width:150px; height:25px; ">&nbsp;@Model.OrderDetailProductResults[0].OrderDate.ToShortDateString()</div>
+<div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">First Name:&nbsp;</div>
+<div style="float:left; height:25px; ">&nbsp;@Model.OrderDetailProductResults[0].FirstName</div>
+<div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Last Name:&nbsp;</div>
+<div style="float:left; height:25px; ">&nbsp;@Model.OrderDetailProductResults[0].LastName</div>
+
+<div style="clear:both;"></div>
+
+<!--====== Container ======-->
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+    <tr class="DataGridHeader">
+        <td style="width:10%; height:25px">Product ID</td>
+        <td style="width:30%">Product Description</td>
+        <td style="width:10%">Quantity</td>
+        <td style="width:10%">Unit Price</td>
+        <td style="width:15%">UOM</td>
+        <td style="width:10%">Discount</td>
+    </tr>
+    <tbody data-bind='template: {name: "OrderDetailTemplate", foreach: LineItems}'> </tbody>
+</table>
+
+
+
+
+
+<div style="float:left; width:850px; height:25px; text-align:right;" class="field-label">Total Order(Cart):&nbsp;</div>
+<div style="float: right; height: 25px; ">&nbsp;@Model.TotalOrders</div>
+
+
+
+<div id="OrderDetailsData" style="visibility: hidden; display: none">
+    @Html.Raw(Json.Encode(orderDetails));
+</div>
+
+@Html.Hidden("OrderID", Model.OrderDetailProductResults[0].OrderID)
+
+<!--====== Template ======-->
+<script type="text/html" id="OrderDetailTemplate">
+
+    <tr data-bind="style: { background: viewModel.SetBackgroundColor($data) }">
+
+        <td style="height:25px"><div data-bind="text: ProductID"></div></td>
+        <td><div data-bind="text: ProductName "></div></td>
+        <td>
+            <div data-bind="text: Quantity, visible: DisplayMode "></div>
+            <div data-bind="visible: EditMode">
+                <input type="text" data-bind="value: Quantity" style="width: 50px" />
+            </div>
+        </td>
+
+        <td><div data-bind="text: UnitPrice"></div></td>
+        <td><div data-bind="text: QuantityPerUnit "></div></td>
+        <td>
+            <div data-bind="text: Discount, visible: DisplayMode "></div>
+            <div data-bind="visible: EditMode">
+                <input type="text" data-bind="value: Discount" style="width:50px" />
+            </div>
+        </td>
+        
+    </tr>
+
+</script>
+<div style="float:left; width:300px; height:25px; ">
+    &nbsp;
+    <span data-bind="visible: EditFields">
+        @Html.TextBox("ShipName", @Model.Order.ShipName, new Dictionary<string, object> { { "data-bind", "value: ShipName" }, { "style", "width:300px" } })
+    </span>
+    <span data-bind="visible: ReadOnlyMode, text: OriginalShipName"></span>
+</div>
+
+<div style="clear:both;"></div>
+
+<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Address:&nbsp;</div>
+<div style="float:left; height:25px; width:300px;">
+    &nbsp;
+    <span data-bind="visible: EditFields">
+        @Html.TextBox("ShipAddress", @Model.Order.ShipAddress, new Dictionary<string, object> { { "data-bind", "value: ShipAddress" }, { "style", "width:300px" } })
+    </span>
+    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipAddress">
+    </span>
+</div>
+<div style="clear:both;"></div>
+
+<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To City:&nbsp;</div>
+<div style="float:left; height:25px; width:300px;">
+    &nbsp;
+    <span data-bind="visible: EditFields">
+        @Html.TextBox("ShipCity", @Model.Order.ShipCity, new Dictionary<string, object> { { "data-bind", "value: ShipCity" }, { "style", "width:300px" } })
+    </span>
+    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipCity">
+    </span>
+</div>
+
+<div style="clear:both;"></div>
+
+<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Region:&nbsp;</div>
+<div style="float:left; height:25px; width:300px; ">
+    &nbsp;
+    <span data-bind="visible: EditFields">
+        @Html.TextBox("ShipRegion", @Model.Order.ShipRegion, new Dictionary<string, object> { { "data-bind", "value: ShipRegion" }, { "style", "width:300px" } })
+    </span>
+    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipRegion">
+    </span>
+</div>
+
+<div style="clear:both;"></div>
+<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Postal Code:&nbsp;</div>
+<div style="float:left; height:25px; width:300px; ">
+    &nbsp;
+    <span data-bind="visible: EditFields">
+        @Html.TextBox("ShipPostalCode", @Model.Order.ShipPostalCode, new Dictionary<string, object> { { "data-bind", "value: ShipPostalCode" }, { "style", "width:300px" } })
+    </span>
+    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipPostalCode">
+    </span>
+</div>
+
+<div style="clear:both;"></div>
+
+<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Country:&nbsp;</div>
+<div style="float:left; height:25px; width:300px; ">
+    &nbsp;
+    <span data-bind="visible: EditFields">
+        @Html.TextBox("ShipCountry", @Model.Order.ShipCountry, new Dictionary<string, object> { { "data-bind", "value: ShipCountry" }, { "style", "width:300px" } })
+    </span>
+    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipCountry">
+    </span>
+</div>
+
+</div>
+
+<div style="clear:both; padding: 5px">&nbsp;</div>
+
+<div style="float:left;  width:150px; height:25px; text-align:right;" class="field-label">Order Total(PayPal):&nbsp;</div>
+<div style="float:left;  width:400px; height:25px; font-weight:bold; ">&nbsp;@Model.Order.OrderTotal</div>
+
+@Html.Hidden("CustomerID", @Model.Customer.CustomerID)
+@Html.Hidden("OrderID", @Model.Order.OrderID)
+@Html.Hidden("OriginalShipName", @Model.Order.ShipName, new Dictionary<string, object> { { "data-bind", "value: OriginalShipName" } })
+@Html.Hidden("OriginalShipAddress", @Model.Order.ShipAddress, new Dictionary<string, object> { { "data-bind", "value: OriginalShipAddress" } })
+@Html.Hidden("OriginalShipCity", @Model.Order.ShipCity, new Dictionary<string, object> { { "data-bind", "value: OriginalShipCity" } })
+@Html.Hidden("OriginalShipRegion", @Model.Order.ShipRegion, new Dictionary<string, object> { { "data-bind", "value: OriginalShipRegion" } })
+@Html.Hidden("OriginalShipPostalCode", @Model.Order.ShipPostalCode, new Dictionary<string, object> { { "data-bind", "value: OriginalShipPostalCode" } })
+@Html.Hidden("OriginalShipCountry", @Model.Order.ShipCountry, new Dictionary<string, object> { { "data-bind", "value: OriginalShipCountry" } })
+@Html.Hidden("OriginalRequiredDate", @Model.Order.RequiredDate.ToShortDateString(), new Dictionary<string, object> { { "data-bind", "value: OriginalRequiredDate" } })
+@Html.Hidden("OriginalShipVia", @Model.Order.ShipVia, new Dictionary<string, object> { { "data-bind", "value: OriginalShipVia" } })
+@Html.Hidden("ShipperName", @Model.Order.ShipperName)
+
+<div id="Shippers" style="visibility: hidden; display: none">
+    @Html.Raw(Json.Encode(Model.Shippers));
+
+</div>
+
+<div style="padding: 20px 10px 10px 10px;">
+    <input id="btnCartHeader" type="button" onclick="CheckoutConfirm()" value="Checkout Confirm" />
+
+</div>
+<div id="MessageBox" data-bind="html: MessageBox"></div>
+
+
+<form id="CheckoutConfirm" method="post" action="/Checkout/CheckoutComplete"></form>
+
+
+<div id="cart-status">
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/Checkout/CheckoutReview.js"></script>
+    <script type="text/javascript">
+        viewModel.IntializeLineItem(@Html.Raw(JsonConvert.SerializeObject(orderDetails, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })));
+    </script>
+}

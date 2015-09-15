@@ -1,0 +1,221 @@
+﻿@using System.Collections;
+@using System.Collections.Generic;
+@using Newtonsoft.Json;
+@model HiLToysViewModel.OrderViewModel
+@{
+    ViewBag.Title = "Order Entry Detail";
+
+    ArrayList shippersDetail = new ArrayList();
+
+    foreach (var item in Model.OrderCustomers)
+    {
+        var shipperDetail = new
+        {
+            ShipperID = item.Shipper.ShipperID,
+           CompanyName= item.Shipper.CompanyName
+           
+            
+          
+        };
+
+        shippersDetail.Add(shipperDetail);
+    }
+
+}
+
+
+
+<h4>Order Entry - Shipping Information</h4>
+
+<div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Order Number:&nbsp;</div>
+<div style="float:left; width:400px; height:25px; font-weight:bold; padding: 0px 0px 0px 5px" id="DivOrderNumber" data-bind="text: OrderID"></div>
+
+<div style="clear:both; height:25px">&nbsp;</div>
+
+<div style="float:left; width:150px; text-align:right;" class="field-label">Order Date:&nbsp;</div>
+<div style="float:left; width:400px; height:25px; ">&nbsp;@Model.Order.OrderDate.ToShortDateString()</div>
+
+<div style="float:left; width:150px; text-align:right;" class="field-label">Required Date:&nbsp;</div>
+<div style="float:left; height:25px">
+    &nbsp;
+    <span data-bind="visible: EditFields">
+        @Html.TextBox("RequiredDate", @Model.Order.RequiredDate.ToShortDateString(), new Dictionary<string, object> { { "data-bind", "value: RequiredDate" }, { "style", "width:75px" } })
+    </span>
+    <span data-bind="visible: ReadOnlyMode">
+        @Model.Order.RequiredDate.ToShortDateString()
+    </span>
+</div>
+
+<div style="clear:both;"></div>
+<div style="float:left; width:150px; height:25px">&nbsp;</div>
+<div style="clear:both;"></div>
+
+<div style="float:left; width:550px">
+
+    <div style="float:left; width:150px; height:25px; text-align:right; " class="field-label">Customer ID:&nbsp;</div>
+    <div style="float:left; width:400px; height:25px; ">&nbsp;@Model.Customer.CustomerID</div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Customer Name:&nbsp;</div>
+    <div style="float:left; width:400px; height:25px; ">&nbsp;@Model.Customer.CompanyName</div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Customer Address:&nbsp;</div>
+    <div style="float:left; width:400px; height:25px; ">&nbsp;@Model.Customer.Address</div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Customer City:&nbsp;</div>
+    <div style="float:left; width:400px; height:25px; ">&nbsp;@Model.Customer.City</div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Customer Region:&nbsp;</div>
+    <div style="float:left; width:400px; height:25px; ">&nbsp;@Model.Customer.Region</div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left;  width:150px; height:25px; text-align:right;" class="field-label">Customer Postal Code:&nbsp;</div>
+    <div style="float:left;  width:400px; height:25px; ">&nbsp;@Model.Customer.PostalCode</div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left;  width:150px; height:25px; text-align:right;" class="field-label">Customer Country:&nbsp;</div>
+    <div style="float:left;  width:400px; height:25px; ">&nbsp;@Model.Customer.Country</div>
+
+</div>
+
+<div style="float:left;">
+
+    <div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Ship Via:&nbsp;</div>
+    <div style="float:left; width:300px; height:25px">
+        &nbsp;
+        <span data-bind="visible: EditFields">
+            <select id="ShipVia" style="width:100%" data-bind="options: Shippers,  optionsText: 'CompanyName', value: selectedCountry, optionsCaption: 'Select a Shipper...'"></select>
+        </span>
+        <span id="DivShipVia" data-bind="visible: ReadOnlyMode, text: ShipperName">
+            &nbsp;
+        </span>
+
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left; width:150px; height:25px; text-align:right;" class="field-label">Ship To Name:&nbsp;</div>
+    <div style="float:left; width:300px; height:25px; ">
+        &nbsp;
+        <span data-bind="visible: EditFields">
+            @Html.TextBox("ShipName", @Model.Order.ShipName, new Dictionary<string, object> { { "data-bind", "value: ShipName" }, { "style", "width:300px" } })
+        </span>
+        <span data-bind="visible: ReadOnlyMode, text: OriginalShipName"></span>
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Address:&nbsp;</div>
+    <div style="float:left; height:25px; width:300px;">
+        &nbsp;
+        <span data-bind="visible: EditFields">
+            @Html.TextBox("ShipAddress", @Model.Order.ShipAddress, new Dictionary<string, object> { { "data-bind", "value: ShipAddress" }, { "style", "width:300px" } })
+        </span>
+        <span data-bind="visible: ReadOnlyMode,  text: OriginalShipAddress">
+        </span>
+    </div>
+    <div style="clear:both;"></div>
+
+    <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To City:&nbsp;</div>
+    <div style="float:left; height:25px; width:300px;">
+        &nbsp;
+        <span data-bind="visible: EditFields">
+            @Html.TextBox("ShipCity", @Model.Order.ShipCity, new Dictionary<string, object> { { "data-bind", "value: ShipCity" }, { "style", "width:300px" } })
+        </span>
+        <span data-bind="visible: ReadOnlyMode,  text: OriginalShipCity">
+        </span>
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Region:&nbsp;</div>
+    <div style="float:left; height:25px; width:300px; ">
+        &nbsp;
+        <span data-bind="visible: EditFields">
+            @Html.TextBox("ShipRegion", @Model.Order.ShipRegion, new Dictionary<string, object> { { "data-bind", "value: ShipRegion" }, { "style", "width:300px" } })
+        </span>
+        <span data-bind="visible: ReadOnlyMode,  text: OriginalShipRegion">
+        </span>
+    </div>
+
+    <div style="clear:both;"></div>
+    <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Postal Code:&nbsp;</div>
+    <div style="float:left; height:25px; width:300px; ">
+        &nbsp;
+        <span data-bind="visible: EditFields">
+            @Html.TextBox("ShipPostalCode", @Model.Order.ShipPostalCode, new Dictionary<string, object> { { "data-bind", "value: ShipPostalCode" }, { "style", "width:300px" } })
+        </span>
+        <span data-bind="visible: ReadOnlyMode,  text: OriginalShipPostalCode">
+        </span>
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Country:&nbsp;</div>
+    <div style="float:left; height:25px; width:300px; ">
+        &nbsp;
+        <span data-bind="visible: EditFields">
+            @Html.TextBox("ShipCountry", @Model.Order.ShipCountry, new Dictionary<string, object> { { "data-bind", "value: ShipCountry" }, { "style", "width:300px" } })
+        </span>
+        <span data-bind="visible: ReadOnlyMode,  text: OriginalShipCountry">
+        </span>
+    </div>
+
+</div>
+
+<div style="clear:both; padding: 5px">&nbsp;</div>
+
+<div style="float:left;  width:150px; height:25px; text-align:right;" class="field-label">Order Total:&nbsp;</div>
+<div style="float:left;  width:400px; height:25px; font-weight:bold; ">&nbsp;@Model.Order.OrderTotalFormatted</div>
+
+<div style="clear:both; padding: 5px">&nbsp;</div>
+
+<input id="btnCreateOrder" type="button" value="Create Order" data-bind="visible: DisplayCreateOrderButton" />
+<input id="btnEditOrder" type="button" value="Edit Order" data-bind="visible: DisplayEditOrderButton" />
+<input id="btnUpdateOrder" type="button" value="Update Order" data-bind="visible: DisplayUpdateOrderButton" />
+<input id="btnOrderDetails" type="button" value="Order Details" data-bind="visible: DisplayOrderDetailsButton" />
+<input id="btnCancelChanges" type="button" value="Cancel Changes" data-bind="visible: DisplayCancelChangesButton" />
+
+@Html.Hidden("CustomerID", @Model.Order.CustomerID)
+@Html.Hidden("OrderID", @Model.Order.OrderID)
+@Html.Hidden("OriginalShipName", @Model.Order.ShipName, new Dictionary<string, object> { { "data-bind", "value: OriginalShipName" } })
+@Html.Hidden("OriginalShipAddress", @Model.Order.ShipAddress, new Dictionary<string, object> { { "data-bind", "value: OriginalShipAddress" } })
+@Html.Hidden("OriginalShipCity", @Model.Order.ShipCity, new Dictionary<string, object> { { "data-bind", "value: OriginalShipCity" } })
+@Html.Hidden("OriginalShipRegion", @Model.Order.ShipRegion, new Dictionary<string, object> { { "data-bind", "value: OriginalShipRegion" } })
+@Html.Hidden("OriginalShipPostalCode", @Model.Order.ShipPostalCode, new Dictionary<string, object> { { "data-bind", "value: OriginalShipPostalCode" } })
+@Html.Hidden("OriginalShipCountry", @Model.Order.ShipCountry, new Dictionary<string, object> { { "data-bind", "value: OriginalShipCountry" } })
+@Html.Hidden("OriginalRequiredDate", @Model.Order.RequiredDate.ToShortDateString(), new Dictionary<string, object> { { "data-bind", "value: OriginalRequiredDate" } })
+@Html.Hidden("OriginalShipVia", @Model.Order.ShipVia, new Dictionary<string, object> { { "data-bind", "value: OriginalShipVia" } })
+@Html.Hidden("ShipperName", @Model.Order.ShipperName)
+
+
+
+<div id="MessageBox" data-bind="html: MessageBox"></div>
+
+
+
+
+<form id="OrderDetails" method="post" action="/Orders/OrderEntryDetail">
+    <input id="OrderID" name="OrderID" type="hidden" />
+</form>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/Orders/OrderEntryHeader.js"></script>
+    <script type="text/javascript">
+    </script>
+}
+
+

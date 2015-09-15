@@ -1,0 +1,27 @@
+﻿@model IEnumerable<HiLToysDataModel.Category>
+
+    <div class="container">
+
+        <div class="navbar-collapse collapse">
+            <ul id="categories" class="nav navbar-nav">
+
+                <li>
+                    @Html.ActionLink("Cars", "Browse", "Store", new { Category = "Cars" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Planes", "Browse", "Store", new { Category = "Planes" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Trucks", "Browse", "Store", new { Category = "Trucks" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Boats", "Browse", "Store", new { Category = "Boats" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Rockets", "Browse", "Store", new { Category = "Rockets" }, null)
+                </li>
+
+
+            </ul>
+        </div>
+    </div>

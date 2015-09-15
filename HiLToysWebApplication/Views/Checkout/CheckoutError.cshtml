@@ -1,0 +1,15 @@
+﻿@model HiLToysViewModel.CheckoutViewModel
+@{
+    ViewBag.Title = "CheckoutError";
+}
+
+<h1>Checkout Error</h1>
+<p>
+    <em>Wrong! Your error is:</em>
+    @Model.ErrorMessage
+</p>
+
+<p>
+    Back to review
+    @Html.ActionLink("store", "Index", "Store")
+</p>
