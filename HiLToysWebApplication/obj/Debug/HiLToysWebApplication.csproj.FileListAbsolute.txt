@@ -1,10 +1,10 @@
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\EntityFramework.dll
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\HiLToysWebApplication.dll.config
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\HiLToysWebApplication.dll
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\HiLToysWebApplication.pdb
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\Antlr3.Runtime.dll
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\AppHarbify.EF.dll
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\EMD.dll
+C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\EntityFramework.dll
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\EntityFramework.SqlServer.dll
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\HiLToysBusinessServices.dll
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\HiLToysDataModel.dll
@@ -62,13 +62,6 @@ C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLTo
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\System.Web.WebPages.Deployment.xml
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\System.Web.WebPages.Razor.xml
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\Antlr3.Runtime.pdb
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.firstdb.resources
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.again.resources
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.again2.resources
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.again4.resources
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.migfinal.resources
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.migrfinal3.resources
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.migrtpal.resources
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.csproj.GenerateResource.Cache
+C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.dll
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.pdb

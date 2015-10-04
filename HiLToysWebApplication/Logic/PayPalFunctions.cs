@@ -75,8 +75,8 @@ using HiLToysDataModel;
             }
 
 
-            string returnURL = "https://bilhil@appharbor.com/hilecomvctoysapp2015.git/Checkout/CheckoutReview";
-            string cancelURL = "https://bilhil@appharbor.com/hilecomvctoysapp2015.git/Checkout/CheckoutCancel";
+            string returnURL = "https://bilhil@appharbor.com/hilecoemvc2009toysapp.git/hilecomvctoysapp2015.git/Checkout/CheckoutReview";
+            string cancelURL = "https://bilhil@appharbor.com/hilecoemvc2009toysapp.git/Checkout/CheckoutCancel";
 
             NVPCodec encoder = new NVPCodec();
             encoder["METHOD"] = "SetExpressCheckout";
