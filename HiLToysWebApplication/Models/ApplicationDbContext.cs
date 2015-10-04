@@ -26,7 +26,7 @@ namespace HiLToysWebApplication.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("ApplicationDbContext", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -40,7 +40,13 @@ namespace HiLToysWebApplication.Models
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             base.OnModelCreating(modelBuilder);
         }
-
+        public DbSet<HiLToysDataModel.Category> Categories { get; set; }
+        public DbSet<HiLToysDataModel.Product> Products { get; set; }
+        public DbSet<HiLToysDataModel.Cart> Carts { get; set; }
+        public DbSet<HiLToysDataModel.Models.Order> Orders { get; set; }
+        public DbSet<HiLToysDataModel.Models.OrderDetail> OrderDetails { get; set; }
+        public DbSet<HiLToysDataModel.Models.Customer> Customers { get; set; }
+        public DbSet<HiLToysDataModel.Models.Shipper> Shippers { get; set; }
        
     }
     public class HiLToysApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
@@ -73,7 +79,7 @@ namespace HiLToysWebApplication.Models
         public IDbSet<HiLToysDataModel.Models.OrderDetail> OrderDetails { get; set; }
         public IDbSet<HiLToysDataModel.Models.Customer> Customers { get; set; }
         public IDbSet<HiLToysDataModel.Models.Shipper> Shippers { get; set; }
-
+        
         public int SaveChanges()
         {
             return 0;

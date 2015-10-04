@@ -17,26 +17,13 @@ var lineItemDisplay = function () {
     this.DisplayCancelSaveButtons; 
 };
 
-
 var newDetailProductLineItem = new lineItemDisplay();
-
 
 var viewModel = {
 
     LineItems: ko.observableArray(),
     MessageBox: ko.observable(),
-    RegisterUIEventHandlers: function () {
-
-        $('#save').click(function (e) {
-           
-            // Check whether the form is valid. Note: Remove this check, if you are not using HTML5
-            //  viewModel.MessageBox(Product.ViewModel);
-           // jsondatax = initialLineItems.length;
-
-        });
-
-    },
-
+   
     AddLineItem: function (currentLineItemData) {
         currentLineItem = this.LineItems.indexOf(currentLineItemData);
         var lineItem = this.LineItems()[currentLineItem];
@@ -56,14 +43,6 @@ var viewModel = {
         IntializeL(datajsn);
     }
    
-    //AddNewProductDetailComplete: function (currentLineItem) {
-
-    //    this.LineItems()[currentLineItem].DisplayMode(true);
-    //    this.LineItems()[currentLineItem].DisplayCancelSaveButtons(false);
-
-    //    this.LineItems()[currentLineItem].OriginalQuantity(this.LineItems()[currentLineItem].Quantity());
-
-    //}
 
 };
 
@@ -133,10 +112,7 @@ function AddProductDetail(currentLineItem, rowIndex) {
     newProductLineItem.ProductName = currentLineItem.ProductName();
     newProductLineItem.Quantity = currentLineItem.Quantity();
     newProductLineItem.UnitPrice = currentLineItem.UnitPrice();
-   // newProductLineItem.ImagePath = currentLineItem.ImagePath();
-    // newProductLineItem.RowIndex = rowIndex;
-   // $("#DeleteConfirmationText").html(newProductLineItem.UnitPrice);
-    var url = "/Carts/AddNewProductCartDetailLineItem";
+      var url = "/Carts/AddNewProductCartDetailLineItem";
 
     $.post(url, newProductLineItem, function (results, textStatus) {
         GetProductInformationComplete(results);
@@ -166,9 +142,6 @@ function ShowDetailLineItem(currentLineItem, rowIndex)
     $("#Description").html(currentLineItem.Description());
     // newProductLineItem.RowIndex = rowIndex;
 
-
-
-   
 }
 function AddDetail() {
     var newDetailProductLineItem2 = new lineItemDisplay();
@@ -204,9 +177,7 @@ function GetCartCountComplete(results)
 }
 
 $(document).ready(function () {
-   // Product.BindUIwithViewModel(Product.ViewModel);
-    //Product.RegisterUIEventHandlers();
-    // Product.IntializeLineItem(Product.ViewModel);
+   
     var InitialiceCartCount = 0;
     var url = "/Carts/GetCartCount";
 
@@ -214,7 +185,7 @@ $(document).ready(function () {
         GetCartCountComplete(results);
     });
 
-    viewModel.RegisterUIEventHandlers();
+    //viewModel.RegisterUIEventHandlers();
     viewModel.BindUIwithViewModel(viewModel);
    
     

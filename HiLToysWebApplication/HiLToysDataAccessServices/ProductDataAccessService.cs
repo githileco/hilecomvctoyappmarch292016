@@ -17,15 +17,12 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
         
     public class ProductDataAccessService
     {
-        private IApplicationDbContext storeDB;
+        private ApplicationDbContext storeDB;
         public ProductDataAccessService()
         {
-            storeDB = new HiLToysApplicationDbContext();
+            storeDB = new ApplicationDbContext();
         }
-        //public ProductDataAccessService(IApplicationDbContext dbContext)
-        //{
-        //    storeDB = dbContext;
-        //}
+      
        
         public HiLToysDataModel.Product GetProductInformation(int productID)
         {

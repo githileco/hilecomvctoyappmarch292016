@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using Microsoft.AspNet.FriendlyUrls;
 namespace HiLToysWebApplication
 {
     public class RouteConfig
@@ -20,7 +20,9 @@ namespace HiLToysWebApplication
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Store", action = "Index", id = UrlParameter.Optional }
             );
-
+            var settings = new FriendlyUrlSettings();
+            settings.AutoRedirectMode = RedirectMode.Permanent;
+            routes.EnableFriendlyUrls(settings);
 
         }
     }

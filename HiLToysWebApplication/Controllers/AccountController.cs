@@ -51,15 +51,15 @@ namespace HiLToysWebApplication.Controllers
         private void MigrateShoppingCart(string UserName)
         {
             // Associate shopping cart items with logged-in user
-            var cart = ShoppingCartActions.GetCart(this.HttpContext);
+            var cart = ShoppingCartActions.GetCart();
 
             cart.MigrateCart(UserName);
-            Session[ShoppingCartActions.ShoppingCartItemsessionKey] = UserName;
+           // Session[ShoppingCartActions.ShoppingCartItemsessionKey] = UserName;
         }
         private void MigrateUser(string Email, string FirstName, string LastName)
         {
             // Associate shopping cart items with logged-in user
-            var cart = ShoppingCartActions.GetCart(this.HttpContext);
+            var cart = ShoppingCartActions.GetCart();
 
             cart.MigrateUser(Email, FirstName, LastName);
         }

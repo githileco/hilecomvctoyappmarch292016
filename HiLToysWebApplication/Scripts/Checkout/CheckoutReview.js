@@ -9,10 +9,11 @@ var lineItemDisplay = function () {
     this.UnitPrice;
     this.QuantityPerUnit;
     this.Discount;
-    this.OriginalQuantity;
-    this.OriginalDiscount;
+   // this.OriginalQuantity;
+   // this.OriginalDiscount;
     this.EditMode;
     this.DisplayMode;
+    //this.ReadOnlyMode;
     this.DisplayDeleteEditButtons;
     this.DisplayCancelSaveButtons;
 };
@@ -21,42 +22,42 @@ var lineItemDisplay = function () {
 var viewModel = {
 
     LineItems: ko.observableArray(),
-    AddNewLineItem: ko.observable(false),
+    //AddNewLineItem: ko.observable(false),
     EditFields: ko.observable(false),
-   // ReadOnlyMode: ko.observable(false),
+    //ReadOnlyMode: ko.observable(true),
     MessageBox: ko.observable(),
     SetBackgroundColor: function (currentLineItemData) {
         var rowIndex = this.LineItems.indexOf(currentLineItemData);
         var colorCode = rowIndex % 2 == 0 ? "White" : "WhiteSmoke";
         return colorCode;
     },
-    SelectedShipVia: ko.observable($("#OriginalShipVia").val()),
-    Shippers: ko.observableArray(([
-            new lineItemDisplay("UK", 65000000),
-            new lineItemDisplay("USA", 320000000),
-            new lineItemDisplay("Sweden", 29000000)
-    ])),
+    //SelectedShipVia: ko.observable($("#OriginalShipVia").val()),
+    //Shippers: ko.observableArray(([
+    //        new lineItemDisplay("UK", 65000000),
+    //        new lineItemDisplay("USA", 320000000),
+    //        new lineItemDisplay("Sweden", 29000000)
+    //])),
     IntializeLineItem: function (datajsn) {
         IntializeLineItem(datajsn);
     },
-    
+    OrderID: ko.observable($("#OrderID").val()),
     BindUIwithViewModel: function (viewModel) {
         ko.applyBindings(viewModel);
-    },
-    OrderID: ko.observable($("#OrderID").val()),
-    RegisterUIEventHandlers: function () {
-
-        $('#save').click(function (e) {
-
-            // Check whether the form is valid. Note: Remove this check, if you are not using HTML5
-            //  viewModel.MessageBox(Product.ViewModel);
-            // jsondatax = initialLineItems.length;
-
-        });
-
     }
 
-}
+    //RegisterUIEventHandlers: function () {
+
+    //    $('#save').click(function (e) {
+
+    //        // Check whether the form is valid. Note: Remove this check, if you are not using HTML5
+    //        //  viewModel.MessageBox(Product.ViewModel);
+    //        // jsondatax = initialLineItems.length;
+
+    //    });
+
+    //}
+
+};
 /*
 if (viewModel.OrderID() == "0" || viewModel.OrderID() == "") {
     // order entry mode
@@ -101,14 +102,15 @@ function CreateLineItem(LineItem) {
     lineItem.ProductID = ko.observable(LineItem.ProductID);
     lineItem.ProductName = ko.observable(LineItem.ProductName);
     lineItem.Quantity = ko.observable(LineItem.Quantity);
-    lineItem.OriginalQuantity = ko.observable(LineItem.Quantity);
-    lineItem.OriginalDiscount = ko.observable(LineItem.Discount);
+    //lineItem.OriginalQuantity = ko.observable(LineItem.Quantity);
+    //lineItem.OriginalDiscount = ko.observable(LineItem.Discount);
     lineItem.UnitPrice = ko.observable(LineItem.UnitPrice);
     lineItem.QuantityPerUnit = ko.observable(LineItem.QuantityPerUnit);
     lineItem.Discount = ko.observable(LineItem.Discount);
     lineItem.BackgroundColor = ko.observable(LineItem.BackgroundColor);
     lineItem.EditMode = ko.observable(false);
     lineItem.DisplayMode = ko.observable(true);
+   // lineItem.ReadOnlyMode = ko.observable(true);
     lineItem.DisplayDeleteEditButtons = ko.observable(true);
     lineItem.DisplayCancelSaveButtons = ko.observable(false);
 
@@ -124,8 +126,8 @@ function LineItem() {
     this.Quantity;
     this.Discount;
     this.RowIndex;
-};
-
+}
+/*
 function ShowAddLineItem() {
     viewModel.AddNewLineItem(true);
 }
@@ -202,13 +204,6 @@ function UpdateOrderDetailComplete(results) {
 }
 
 
-
-
-
-function CheckoutConfirm() {
-    $("#CheckoutConfirm").submit();
-}
-
 function ProductIDEntered(element, e) {
 
     var key;
@@ -225,7 +220,14 @@ function ProductIDEntered(element, e) {
         GetProductInformation(productID)
     }
 
+}*/
+
+
+function CheckoutConfirm() {
+    $("#CheckoutConfirm").submit();
 }
+
+
 function GetCartCountComplete(results) {
     counter = results.TotalCatCount;
 
@@ -240,7 +242,6 @@ $(document).ready(function () {
         GetCartCountComplete(results);
     });
 
-    viewModel.RegisterUIEventHandlers();
     viewModel.BindUIwithViewModel(viewModel);
     
 });

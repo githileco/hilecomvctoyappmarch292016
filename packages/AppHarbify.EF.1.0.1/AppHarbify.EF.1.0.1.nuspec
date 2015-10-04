@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>AppHarbify.EF</id>
+    <version>1.0.1</version>
+    <title />
+    <authors>csainty</authors>
+    <owners>csainty</owners>
+    <projectUrl>https://github.com/csainty/AppHarbify.Tools</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Enable config-free EF on AppHarbor with a single line of code.</description>
+    <dependencies>
+      <dependency id="EntityFramework" version="4.1.10311.0" />
+    </dependencies>
+  </metadata>
+</package>

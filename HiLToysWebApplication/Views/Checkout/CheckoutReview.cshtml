@@ -61,8 +61,6 @@
 
 
 
-
-
 <div style="float:left; width:850px; height:25px; text-align:right;" class="field-label">Total Order(Cart):&nbsp;</div>
 <div style="float: right; height: 25px; ">&nbsp;@Model.TotalOrders</div>
 
@@ -100,12 +98,12 @@
     </tr>
 
 </script>
+<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Name:&nbsp;</div>
 <div style="float:left; width:300px; height:25px; ">
     &nbsp;
-    <span data-bind="visible: EditFields">
-        @Html.TextBox("ShipName", @Model.Order.ShipName, new Dictionary<string, object> { { "data-bind", "value: ShipName" }, { "style", "width:300px" } })
-    </span>
-    <span data-bind="visible: ReadOnlyMode, text: OriginalShipName"></span>
+    
+        @Html.TextBox("ShipName", @Model.Order.ShipName)
+   
 </div>
 
 <div style="clear:both;"></div>
@@ -113,22 +111,17 @@
 <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Address:&nbsp;</div>
 <div style="float:left; height:25px; width:300px;">
     &nbsp;
-    <span data-bind="visible: EditFields">
-        @Html.TextBox("ShipAddress", @Model.Order.ShipAddress, new Dictionary<string, object> { { "data-bind", "value: ShipAddress" }, { "style", "width:300px" } })
-    </span>
-    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipAddress">
-    </span>
-</div>
+
+    @Html.TextBox("ShipAddress", @Model.Order.ShipAddress)
+</div>  
 <div style="clear:both;"></div>
 
 <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To City:&nbsp;</div>
 <div style="float:left; height:25px; width:300px;">
     &nbsp;
-    <span data-bind="visible: EditFields">
-        @Html.TextBox("ShipCity", @Model.Order.ShipCity, new Dictionary<string, object> { { "data-bind", "value: ShipCity" }, { "style", "width:300px" } })
-    </span>
-    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipCity">
-    </span>
+    
+        @Html.TextBox("ShipCity", @Model.Order.ShipCity)
+    
 </div>
 
 <div style="clear:both;"></div>
@@ -136,22 +129,18 @@
 <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Region:&nbsp;</div>
 <div style="float:left; height:25px; width:300px; ">
     &nbsp;
-    <span data-bind="visible: EditFields">
-        @Html.TextBox("ShipRegion", @Model.Order.ShipRegion, new Dictionary<string, object> { { "data-bind", "value: ShipRegion" }, { "style", "width:300px" } })
-    </span>
-    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipRegion">
-    </span>
+   
+        @Html.TextBox("ShipRegion", @Model.Order.ShipRegion)
+    
 </div>
 
 <div style="clear:both;"></div>
 <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Postal Code:&nbsp;</div>
 <div style="float:left; height:25px; width:300px; ">
     &nbsp;
-    <span data-bind="visible: EditFields">
-        @Html.TextBox("ShipPostalCode", @Model.Order.ShipPostalCode, new Dictionary<string, object> { { "data-bind", "value: ShipPostalCode" }, { "style", "width:300px" } })
-    </span>
-    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipPostalCode">
-    </span>
+    
+        @Html.TextBox("ShipPostalCode", @Model.Order.ShipPostalCode)
+    
 </div>
 
 <div style="clear:both;"></div>
@@ -159,14 +148,12 @@
 <div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Country:&nbsp;</div>
 <div style="float:left; height:25px; width:300px; ">
     &nbsp;
-    <span data-bind="visible: EditFields">
-        @Html.TextBox("ShipCountry", @Model.Order.ShipCountry, new Dictionary<string, object> { { "data-bind", "value: ShipCountry" }, { "style", "width:300px" } })
-    </span>
-    <span data-bind="visible: ReadOnlyMode,  text: OriginalShipCountry">
-    </span>
+    
+        @Html.TextBox("ShipCountry", @Model.Order.ShipCountry)
+   
 </div>
 
-</div>
+
 
 <div style="clear:both; padding: 5px">&nbsp;</div>
 
@@ -185,10 +172,7 @@
 @Html.Hidden("OriginalShipVia", @Model.Order.ShipVia, new Dictionary<string, object> { { "data-bind", "value: OriginalShipVia" } })
 @Html.Hidden("ShipperName", @Model.Order.ShipperName)
 
-<div id="Shippers" style="visibility: hidden; display: none">
-    @Html.Raw(Json.Encode(Model.Shippers));
 
-</div>
 
 <div style="padding: 20px 10px 10px 10px;">
     <input id="btnCartHeader" type="button" onclick="CheckoutConfirm()" value="Checkout Confirm" />
@@ -205,11 +189,119 @@
 </div>
 
 @section scripts{
-    @Scripts.Render("~/bundles/jqueryui")
     <script src="~/Scripts/knockout-3.1.0.js"></script>
-    <script src="~/Scripts/knockout.mapping-latest.js"></script>
-    <script src="~/Scripts/Checkout/CheckoutReview.js"></script>
-    <script type="text/javascript">
+<script src="~/Scripts/knockout.mapping-latest.js"></script>
+<script>
+
+        var initialLineItems = "";
+
+        var counter = 0;
+        var lineItemDisplay = function () {
+
+            this.ProductID;
+            this.ProductName;
+            this.Quantity;
+            this.UnitPrice;
+            this.QuantityPerUnit;
+            this.Discount;
+            // this.OriginalQuantity;
+            // this.OriginalDiscount;
+            this.EditMode;
+            this.DisplayMode;
+            //this.ReadOnlyMode;
+            this.DisplayDeleteEditButtons;
+            this.DisplayCancelSaveButtons;
+        };
+
+        // Overall viewmodel for this screen, along with initial state
+        var viewModel = {
+
+            LineItems: ko.observableArray(),
+            EditFields: ko.observable(false),
+            MessageBox: ko.observable(),
+            SetBackgroundColor: function (currentLineItemData) {
+                var rowIndex = this.LineItems.indexOf(currentLineItemData);
+                var colorCode = rowIndex % 2 == 0 ? "White" : "WhiteSmoke";
+                return colorCode;
+            },
+            IntializeLineItem: function (datajsn) {
+                IntializeLineItem(datajsn);
+            },
+            OrderID: ko.observable($("#OrderID").val()),
+            BindUIwithViewModel: function (viewModel) {
+                ko.applyBindings(viewModel);
+            }
+
+        };
+       
+        function IntializeLineItem(viewModeljson) {
+
+            initialLineItems = viewModeljson;
+            for (i = 0; i < initialLineItems.length; i++) {
+                var newLineItem = CreateLineItem(initialLineItems[i]);
+                viewModel.LineItems.push(newLineItem);
+
+            }
+        }
+
+
+        function CreateLineItem(LineItem) {
+
+            var lineItem = new lineItemDisplay();
+
+            lineItem.ProductID = ko.observable(LineItem.ProductID);
+            lineItem.ProductName = ko.observable(LineItem.ProductName);
+            lineItem.Quantity = ko.observable(LineItem.Quantity);
+            lineItem.UnitPrice = ko.observable(LineItem.UnitPrice);
+            lineItem.QuantityPerUnit = ko.observable(LineItem.QuantityPerUnit);
+            lineItem.Discount = ko.observable(LineItem.Discount);
+            lineItem.BackgroundColor = ko.observable(LineItem.BackgroundColor);
+            lineItem.EditMode = ko.observable(false);
+            lineItem.DisplayMode = ko.observable(true);
+            lineItem.DisplayDeleteEditButtons = ko.observable(true);
+            lineItem.DisplayCancelSaveButtons = ko.observable(false);
+
+            return lineItem;
+
+        }
+
+
+
+        function LineItem() {
+            this.OrderID;
+            this.ProductID;
+            this.Quantity;
+            this.Discount;
+            this.RowIndex;
+        }
+        
+
+
+        function CheckoutConfirm() {
+            $("#CheckoutConfirm").submit();
+        }
+
+
+        function GetCartCountComplete(results) {
+            counter = results.TotalCatCount;
+
+            $('#cart-status').text('Cart (' + counter + ')');
+        }
+        function InitialiceCart() {
+
+            var InitialiceCartCount = 0;
+            var url = "/Carts/GetCartCount";
+
+            $.post(url, InitialiceCartCount, function (results, textStatus) {
+                GetCartCountComplete(results);
+            });
+
+            //viewModel.RegisterUIEventHandlers();
+            viewModel.BindUIwithViewModel(viewModel);
+            //viewModel.ReadOnlyMode(true);
+
+        }
+        InitialiceCart();
         viewModel.IntializeLineItem(@Html.Raw(JsonConvert.SerializeObject(orderDetails, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })));
     </script>
-}
+    }

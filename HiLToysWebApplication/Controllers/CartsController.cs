@@ -20,7 +20,7 @@ namespace HiLToysWebApplication.Controllers
          //Session["ShoppingCartItemsessionKey"] = "d7762014-92eb-468a-8ab5-e87c25a63915";
          CartApplicationService cartApplicationService = new CartApplicationService();
 
-           var Cart = ShoppingCartActions.GetCart(this.HttpContext);
+           var Cart = ShoppingCartActions.GetCart();
            string CartID = Cart.ShoppingCartId;
          //string CartID = "7919";
 
@@ -40,7 +40,7 @@ namespace HiLToysWebApplication.Controllers
          List<HiLToysDataModel.Cart> products = new List<HiLToysDataModel.Cart>();
         CartApplicationService cartApplicationService = new CartApplicationService();
          CartViewModel cartViewModel = new CartViewModel();
-         var Cart = ShoppingCartActions.GetCart(this.HttpContext);
+         var Cart = ShoppingCartActions.GetCart();
 
 
          cartViewModel.Cart.CartID = Cart.ShoppingCartId;
@@ -61,8 +61,8 @@ namespace HiLToysWebApplication.Controllers
      {
          CartApplicationService cartApplicationService = new CartApplicationService();
          CartViewModel cartViewModel = new CartViewModel();
-         var Cart = ShoppingCartActions.GetCart(this.HttpContext);
-         cartViewModel.Cart.CartID = Cart.GetCartId(this.HttpContext);
+         var Cart = ShoppingCartActions.GetCart();
+         cartViewModel.Cart.CartID = Cart.ShoppingCartId;
          cartViewModel = cartApplicationService.GetCartCount(cartViewModel);
          ViewData["CartCount"] = cartViewModel.Cart.Count;
 
@@ -73,8 +73,8 @@ namespace HiLToysWebApplication.Controllers
      {
          CartApplicationService cartApplicationService = new CartApplicationService();
          CartViewModel cartViewModel = new CartViewModel();
-         var Cart = ShoppingCartActions.GetCart(this.HttpContext);
-         cartViewModel.Cart.CartID = Cart.GetCartId(this.HttpContext);
+         var Cart = ShoppingCartActions.GetCart();
+         cartViewModel.Cart.CartID = Cart.ShoppingCartId;
          cartViewModel = cartApplicationService.GetCartCount(cartViewModel);
 
          return Json(new
@@ -93,7 +93,7 @@ namespace HiLToysWebApplication.Controllers
             // Add it to the shopping cart
             CartApplicationService cartApplicationService = new CartApplicationService();
             CartViewModel cartViewModel = new CartViewModel();
-            var Cart = ShoppingCartActions.GetCart(this.HttpContext);
+            var Cart = ShoppingCartActions.GetCart();
             
             double subtotal = 99;
             //cart.AddToCart(addedAlbum);
@@ -140,7 +140,7 @@ namespace HiLToysWebApplication.Controllers
 
           //    CartApplicationService cartApplicationService = new CartApplicationService();
       //      CartViewModel cartViewModel = new CartViewModel();
-             var Cart = ShoppingCartActions.GetCart(this.HttpContext);
+             var Cart = ShoppingCartActions.GetCart();
            // string CartID = "7919";
             cartViewModel.Cart.CartID = Cart.ShoppingCartId;
             //cartViewModel.Cart.CartID = CartID;
@@ -168,12 +168,12 @@ namespace HiLToysWebApplication.Controllers
             CartApplicationService cartApplicationService = new CartApplicationService();
             CartViewModel cartViewModel = new CartViewModel();
             //string CartID = "7919";
-           var Cart = ShoppingCartActions.GetCart(this.HttpContext);
-           cartViewModel.Cart.CartID = Cart.GetCartId(this.HttpContext); 
+           var Cart = ShoppingCartActions.GetCart();
+           cartViewModel.Cart.CartID = Cart.ShoppingCartId; 
             cartViewModel.Cart.ProductID = Convert.ToInt32(postedFormData["ProductID"]);
             cartViewModel.Cart.ProductName=Convert.ToString(postedFormData["productName"]);
             string rowIndex = Convert.ToString(postedFormData["RowIndex"]);
-            cartViewModel.Cart.RecordId = Convert.ToInt32(postedFormData["RecordId"]);
+            cartViewModel.Cart.RecordId = Convert.ToString(postedFormData["RecordId"]);
 
             cartViewModel = cartApplicationService.DeleteCartDetailLineItem(cartViewModel);
            // if (cartViewModel.ReturnStatus==true)

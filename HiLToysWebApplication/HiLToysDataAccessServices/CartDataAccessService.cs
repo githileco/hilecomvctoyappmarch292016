@@ -8,19 +8,18 @@ using System.Data.SqlClient;
 using HiLToysViewModel;
 using HiLToysDataModel;
 using HiLToysDataModel.Models;
-//using HiLToysWebApplication.HiLToysDataAccessServices;
 using HiLToysWebApplication.Models;
+using System.Data.Entity.Infrastructure;
 
-//using EMD;
 
 namespace HiLToysWebApplication.HiLToysDataAccessServices
 {
     public class CartDataAccessService
     {
-        private HiLToysApplicationDbContext storeDB;
+        private ApplicationDbContext storeDB;
         public CartDataAccessService()
         {
-            storeDB = new HiLToysApplicationDbContext();
+            storeDB = new ApplicationDbContext();
         }
         /*public CartDataAccessService(IApplicationDbContext dbContext)
         {
@@ -30,7 +29,7 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
 
         public double GetTotal()
         {
-            // Multiply album price by count of that product to get 
+            // Multiply product price by Quantity of that product to get 
             // the current price for each of those products in the cart
             // sum all product price totals to get the cart total
             //double total = 0;
@@ -69,6 +68,7 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
                 cartItem = new HiLToysDataModel.Cart()
                 {
                     CartID = ShoppingCartId,
+                    RecordId = Guid.NewGuid().ToString(),
                     ProductID = cartViewModel.Cart.ProductID,
                     ProductName = cartViewModel.Cart.ProductName,
                     Quantity = cartViewModel.Cart.Quantity,
@@ -79,12 +79,19 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
                 };
 
                 storeDB.Carts.Add(cartItem);
+               // storeDB.Entry(cartItem).State = System.Data.Entity.EntityState.Modified;
             }
             else
             {
                 // If the item does exist in the cart, then add one to the quantity
-                cartItem.Quantity = cartItem.Quantity + cartViewModel.Cart.Quantity;
-                cartItem.Count++;
+               
+                int totqant = 0;
+                int count = 0;
+                count = cartItem.Count + 1;
+                totqant = cartItem.Quantity + cartViewModel.Cart.Quantity;
+                storeDB.Database.ExecuteSqlCommand("update Carts set Quantity = @qnt,Count=@count where ProductID =@Pid ", new SqlParameter("@Pid", cartItem.ProductID), new SqlParameter("@qnt", totqant), new SqlParameter("@count", count));
+                
+           
             }
 
 
@@ -108,6 +115,8 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
           order = orderViewModel.Order;
           storeDB.Orders.Add(order);
           storeDB.SaveChanges();
+         // DateTime orddate = Convert.ToDateTime(order.OrderDate);
+          
 	      List<HiLToysDataModel.Cart> myOrderList = GetCartItems();
 
             // Add OrderDetail information to the DB for each product purchased.
@@ -166,17 +175,9 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
         }
         public void MigrateCart(string userName, string ShoppingCartId)
         {
-            var shoppingCart = storeDB.Carts.Where(c => c.CartID == ShoppingCartId);
-
-            if (shoppingCart != null)
-            {
-                foreach (HiLToysDataModel.Cart item in shoppingCart)
-                {
-                    item.CartID = userName;
-                }
-                storeDB.SaveChanges();
-            }
-
+            
+            storeDB.Database.ExecuteSqlCommand("update Carts set CartID = @userName WHERE CartID=@ShoppingCartId ", new SqlParameter("@userName", userName), new SqlParameter("@ShoppingCartId", ShoppingCartId));
+            storeDB.SaveChanges();
         }
         public List<HiLToysDataModel.Models.OrderDetail> GetOrderDetail(int OrderID)
         {
@@ -185,47 +186,38 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
         public List<HiLToysDataModel.Cart> GetCartItems()
         { 
 
-            return storeDB.Carts.Where(cart => cart.CartID == ShoppingCartId).ToList();
-
+            //return storeDB.Carts.Where(cart => cart.CartID == ShoppingCartId).ToList();
+            return storeDB.Database.SqlQuery<Cart>("SELECT* FROM Carts WHERE CartID = @ShoppingCartId", new SqlParameter("@ShoppingCartId", ShoppingCartId)).ToList();
         }
-       /* public List<HiLToysDataModel.Cart> GetCarts(string CartID)
-        {
-            ShoppingCartId = CartID;
-            storeDB.Configuration.ProxyCreationEnabled = false;
-            //List<HiLToysDataModel.Cart> carts = new List<HiLToysDataModel.Cart>();
-            return storeDB.Carts.Where(cart => cart.CartID == ShoppingCartId).ToList();
-            //carts = storeDB.Carts.ToList();
-           // return carts;
-
-        }*/
+       
         public CartViewModel GetCartCount(CartViewModel cartViewModel)
         {
             ShoppingCartId = cartViewModel.Cart.CartID;
             cartViewModel.Cart.Count = GetCount();
            return cartViewModel;
         }
+       
         public CartViewModel GetCarts(CartViewModel cartViewModel)
-
         {
 
             CartViewModel rtncartViewModel = new CartViewModel();
             ShoppingCartId = cartViewModel.Cart.CartID;
-            rtncartViewModel.Carts=storeDB.Carts.Where(cart => cart.CartID == ShoppingCartId).ToList();
             rtncartViewModel.Cart.CartTotal = GetTotal();
             rtncartViewModel.Cart.Count = GetCount();
-
+            rtncartViewModel.Carts= storeDB.Database.SqlQuery<Cart>("SELECT* FROM Carts WHERE CartID = @ShoppingCartId", new SqlParameter("@ShoppingCartId", ShoppingCartId)).ToList();
             return rtncartViewModel;
-            
+
         }
-        public CartViewModel DeleteCartDetailLineItem(CartViewModel cartViewModel)
+        
+
+        public CartViewModel DeleteCartDetailLineItemX(CartViewModel cartViewModel)
         {
             CartViewModel rtncartViewModel = new CartViewModel();
-
+           
             ShoppingCartId = cartViewModel.Cart.CartID;
             rtncartViewModel.ReturnStatus = false;
             var cartItem = storeDB.Carts.Single(
-           cart => cart.CartID == ShoppingCartId
-           && cart.RecordId == cartViewModel.Cart.RecordId);
+           cart => cart.CartID == ShoppingCartId && cart.RecordId == cartViewModel.Cart.RecordId);
 
             int itemCount = 0;
 
@@ -252,36 +244,66 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
             return rtncartViewModel;
 
         }
+        public CartViewModel DeleteCartDetailLineItem(CartViewModel cartViewModel)
+        {
+            CartViewModel rtncartViewModel = new CartViewModel();
+            string RecordId = "";
+            RecordId = cartViewModel.Cart.RecordId;
+            ShoppingCartId = cartViewModel.Cart.CartID;
+            rtncartViewModel.ReturnStatus = false;
+            var cartItem = storeDB.Carts.Single(
+           cart => cart.CartID == ShoppingCartId && cart.RecordId == cartViewModel.Cart.RecordId);
+
+           // int itemCount = 0;
+
+            if (cartItem != null)
+            {
+                storeDB.Database.ExecuteSqlCommand("DELETE FROM Carts WHERE CartID = @ShoppingCartId AND RecordId=@RecordId", new SqlParameter("@RecordId", RecordId), new SqlParameter("@ShoppingCartId", ShoppingCartId));
+
+                // Save changes
+                storeDB.SaveChanges();
+                rtncartViewModel.ReturnStatus = true;
+            }
+
+            rtncartViewModel.Cart.CartTotal = GetTotal();
+
+            rtncartViewModel.Cart.Count = GetCount();
+            return rtncartViewModel;
+
+        }
+     
      public CartViewModel UpdateCartDetailLineItem(CartViewModel cartViewModel)
-    {
-         CartViewModel rtncartViewModel=new CartViewModel();
+     {
+         CartViewModel rtncartViewModel = new CartViewModel();
 
          ShoppingCartId = cartViewModel.Cart.CartID;
          rtncartViewModel.ReturnStatus = false;
 
-        var cartItem = storeDB.Carts.SingleOrDefault(
-        c => c.CartID == ShoppingCartId
-        && c.ProductID == cartViewModel.Cart.ProductID);
+         var cartItem = storeDB.Carts.SingleOrDefault(
+         c => c.CartID == ShoppingCartId
+         && c.ProductID == cartViewModel.Cart.ProductID);
 
-        if (cartItem != null)
-        {
+         if (cartItem != null)
+         {
+             int quantity = 0;
+             quantity = cartViewModel.Cart.Quantity;
+             storeDB.Database.ExecuteSqlCommand("update Carts set Quantity = @quantity WHERE CartID=@ShoppingCartId AND ProductID=@ProductID", new SqlParameter("@quantity", quantity), new SqlParameter("@ShoppingCartId", ShoppingCartId), new SqlParameter("@ProductID", cartViewModel.Cart.ProductID));
 
-            cartItem.Quantity = cartViewModel.Cart.Quantity;
-            storeDB.SaveChanges();
-           
-            rtncartViewModel.ReturnStatus = true;
-        }
-        else
-        {
-            rtncartViewModel.ReturnStatus = false;
-        }
+             //cartItem.Quantity = cartViewModel.Cart.Quantity;
+             storeDB.SaveChanges();
 
-        rtncartViewModel.Cart.CartTotal = GetTotal();
+             rtncartViewModel.ReturnStatus = true;
+         }
+         else
+         {
+             rtncartViewModel.ReturnStatus = false;
+         }
 
-            
+         rtncartViewModel.Cart.CartTotal = GetTotal();
+
+
          return rtncartViewModel;
      }
-
         
         
     }

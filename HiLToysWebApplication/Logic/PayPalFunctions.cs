@@ -15,11 +15,11 @@ using System.Collections.Generic;
 using HiLToysApplicationServices;
 using HiLToysViewModel;
 using HiLToysDataModel;
-namespace HiLToysWebApplication.Logic
-{
-    public class PayPalFunctions
-    {
-    }
+//namespace HiLToysWebApplication.Logic
+//{
+    //public class PayPalFunctions
+    //{
+    //}
     public class NVPAPICaller
     {
        // private ApplicationDbContext db = new ApplicationDbContext();
@@ -44,10 +44,14 @@ namespace HiLToysWebApplication.Logic
         //Replace <Your API Username> with your API Username
         //Replace <Your API Password> with your API Password
         //Replace <Your Signature> with your Signature
-        public string APIUsername = "<Your API Username>";
-        private string APIPassword = "<Your API Password>";
-        private string APISignature = "<Your Signature>";
-        private string Subject = "";
+
+        public string APIUsername = "bilal2008hil-facilitator_api1.gmail.com";
+        private string APIPassword = "TY72G5HK2YXT5FB6";
+        private string APISignature = "AQU0e5vuZCvSg-XJploSa.sGUDlpAFqr2FhUuHxYUzmBWd6j.OMdjLnZ";
+
+
+       
+        //private string Subject = "past due";
         private string BNCode = "PP-ECWizard";
 
 
@@ -70,14 +74,15 @@ namespace HiLToysWebApplication.Logic
                 host = host_SB;
             }
 
-            string returnURL = "http://localhost:49168/Checkout/CheckoutReview";
-            string cancelURL = "http://localhost:49168/Checkout/CheckoutCancel";
+
+            string returnURL = "https://bilhil@appharbor.com/hilecomvctoysapp2015.git/Checkout/CheckoutReview";
+            string cancelURL = "https://bilhil@appharbor.com/hilecomvctoysapp2015.git/Checkout/CheckoutCancel";
 
             NVPCodec encoder = new NVPCodec();
             encoder["METHOD"] = "SetExpressCheckout";
             encoder["RETURNURL"] = returnURL;
             encoder["CANCELURL"] = cancelURL;
-            encoder["BRANDNAME"] = "Wingtip Toys Sample Application";
+            encoder["BRANDNAME"] = "HiLEco MVC Toys Sample Application 2015";
             encoder["PAYMENTREQUEST_0_AMT"] = amt;
             encoder["PAYMENTREQUEST_0_ITEMAMT"] = amt;
             encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
@@ -86,7 +91,7 @@ namespace HiLToysWebApplication.Logic
             // Get the Shopping Cart Products
             CartApplicationService cartApplicationService = new CartApplicationService();
 
-            var Cart = ShoppingCartActions.GetCart(this.HttpContext);
+            var Cart = ShoppingCartActions.GetCart();
             // string CartID = Cart.GetCartId(this.HttpContext);
             string CartID = "";
             CartID = Cart.ShoppingCartId;
@@ -129,7 +134,7 @@ namespace HiLToysWebApplication.Logic
                 return false;
             }
         }
-
+        //Requested URL: /ErrorCode=10002&Desc=Security error&Desc2=Security header is not valid/CheckoutError
         public bool GetCheckoutDetails(string token, ref string PayerID, ref NVPCodec decoder, ref string retMsg)
         {
             if (bSandbox)
@@ -221,7 +226,7 @@ namespace HiLToysWebApplication.Logic
             catch (Exception e)
             {
                 // Log the exception.
-                //WingtipToys.Logic.ExceptionUtility.LogException(e, "HttpCall in PayPalFunction.cs");
+                HiLToysWebApplication.Logic.ExceptionUtility.LogException(e, "HttpCall in PayPalFunction.cs");
             }
 
             //Retrieve the Response returned from the NVP API call to PayPal.
@@ -248,10 +253,10 @@ namespace HiLToysWebApplication.Logic
             if (!IsEmpty(APISignature))
                 codec[SIGNATURE] = APISignature;
 
-            if (!IsEmpty(Subject))
-                codec["SUBJECT"] = Subject;
+            //if (!IsEmpty(Subject))
+            //    codec["SUBJECT"] = Subject;
 
-            codec["VERSION"] = "88.0";
+            codec["VERSION"] = "104";
 
             return codec.Encode();
         }
@@ -335,4 +340,4 @@ namespace HiLToysWebApplication.Logic
             return name + index;
         }
     }
-}
+//}

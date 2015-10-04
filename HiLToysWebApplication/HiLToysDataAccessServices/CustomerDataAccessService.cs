@@ -16,10 +16,10 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
 
     public class CustomerDataAccessService
     {
-        private IApplicationDbContext storeDB;
+        private ApplicationDbContext storeDB;
         public CustomerDataAccessService()
         {
-            storeDB = new HiLToysApplicationDbContext();
+            storeDB = new ApplicationDbContext();
         }
        /* public CustomerDataAccessService(IApplicationDbContext dbContext)
         {

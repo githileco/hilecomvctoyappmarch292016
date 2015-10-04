@@ -9,17 +9,16 @@ using HiLToysDataModel;
 using System.Data;
 using System.Data.SqlClient;
 using HiLToysViewModel;
-//using EMD;
 using HiLToysWebApplication.Models;
 
 namespace HiLToysWebApplication.HiLToysDataAccessServices
 {
     public class OrderDataAccessService
     {
-        private IApplicationDbContext storeDB;
+        private ApplicationDbContext storeDB;
         public OrderDataAccessService()
         {
-            storeDB = new HiLToysApplicationDbContext();
+            storeDB = new ApplicationDbContext();
         }
         //public OrderDataAccessService(IApplicationDbContext dbContext)
         //{
@@ -63,19 +62,6 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
             OrderViewModel orderViewModel = new OrderViewModel();
             
 
-            /*
-              ProductID=p.ProductID,
-                       ProductName=p.ProductName,
-                       QuantityPerUnit=p.QuantityPerUnit,
-                       UnitPrice=p.UnitPrice,
-                       Quantity=od.Quantity,
-                       CustomerID = cu.CustomerID,
-                        FirstName = cu.FirstName,
-                       LastName = cu.LastName,
-                       OrderDate = od.OrderDate,
-                       OrderID=ord.OrderID,
-                       Discount = od.Discount
-             */
             orderViewModel.Order.OrderID = OrderDetailProductResult[0].OrderID;
             orderViewModel.Order.OrderDate = OrderDetailProductResult[0].OrderDate;
            
@@ -101,15 +87,9 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
             return orderViewModel;
 
         }
-       /* public List<HiLToysDataModel.Models.Shipper> GetShippers()
-        {
-            HiLToysEMDModelContainer storeDB = new HiLToysEMDModelContainer();
-            return storeDB.Shippers.ToList();
-
-        }*/
+      
         public List<OrderDetailProductResult> GetOrderDetailsx(int orderID)
         {
-          //  HiLToysEMDModelContainer storeDB = new HiLToysEMDModelContainer();
             var rslt = from p in storeDB.Products join od in storeDB.OrderDetails on p.ProductID equals od.ProductID
                        join ord in storeDB.Orders on od.OrderID equals ord.OrderID
                        join cu in storeDB.Customers on ord.CustomerID equals cu.CustomerID
@@ -139,7 +119,6 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
         }
         public OrderViewModel GetOrderDetails(int orderID)
         {
-           // HiLToysEMDModelContainer storeDB = new HiLToysEMDModelContainer();
             var rslt = from p in storeDB.Products
                        join od in storeDB.OrderDetails on p.ProductID equals od.ProductID
                        join ord in storeDB.Orders on od.OrderID equals ord.OrderID
@@ -165,8 +144,6 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
             }
 
 
-            //return rslt.ToList<OrderCustomerResult>());
-            // return rslt.ToList<OrderCustomerResult>();
             return LoadOrderDetailProduct(rslt.ToList<OrderDetailProductResult>());
 
 
@@ -174,8 +151,6 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
         public OrderCustomer GetOrder(int orderID)
         {
 
-           // HiLToysEMDModelContainer storeDB = new HiLToysEMDModelContainer();
-            //OrderCustomer rsltorderCustomer = new OrderCustomer();
 
           var  rslt = from o in storeDB.Orders
                        join cu in storeDB.Customers on o.CustomerID equals cu.CustomerID
@@ -212,24 +187,12 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
                rslt = from a in rslt where a.OrderID == orderID select a;
            }
 
-
-           //return rslt.ToList<OrderCustomerResult>());
-          // return rslt.ToList<OrderCustomerResult>();
            return LoadOrderCustomer(rslt.ToList<OrderCustomerResult>());
         }
-       /* public OrderCustomer GetOrder(int orderID)
-        {
-            List<HiLToysDataModel.OrderCustomerResult> rsltlst=new List<HiLToysDataModel.OrderCustomerResult>();
-             rsltlst=GetOrderx(orderID);
-             OrderCustomer x = new OrderCustomer();
-            x= LoadOrderCustomer(rsltlst);
-             return x;
-        
-        }*/
+      
         public double GetOrderTotal(int orderID)
         {
-           // HiLToysEMDModelContainer storeDB = new HiLToysEMDModelContainer();
-            OrderDetail Xm=new OrderDetail();
+           // OrderDetail Xm=new OrderDetail();
             var total = (from orderDetails in storeDB.OrderDetails
                          where orderDetails.OrderID == orderID
                          select (int?)(orderDetails.Quantity) * (1.00 - orderDetails.Discount) * orderDetails.UnitPrice).Sum();
@@ -237,9 +200,6 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
         }
         public List<HiLToysDataModel.Models.Shipper> GetShippers()
         {
-           // HiLToysEMDModelContainer storeDB = new HiLToysEMDModelContainer();
-           // List<HiLToysDataModel.Models.Shipper> shippers = new List<HiLToysDataModel.Models.Shipper>();
-           // shippers=storeDB.Shippers().
 
             var results = (from a in storeDB.Shippers  orderby a.CompanyName descending select a); 
             return results.ToList<HiLToysDataModel.Models.Shipper>();

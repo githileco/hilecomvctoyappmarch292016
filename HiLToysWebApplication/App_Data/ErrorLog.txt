@@ -1,0 +1,9 @@
+********** 27-Sep-15 4:06:50 PM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 216
+

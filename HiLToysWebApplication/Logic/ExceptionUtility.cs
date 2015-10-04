@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.IO;
 
 namespace HiLToysWebApplication.Logic
@@ -12,14 +13,15 @@ namespace HiLToysWebApplication.Logic
     // All methods are static, so this can be private
     private ExceptionUtility()
     { }
-
+      
     // Log an Exception
     public static void LogException(Exception exc, string source)
     {
       // Include logic for logging exceptions
       // Get the absolute path to the log file
-      string logFile = "App_Data/ErrorLog.txt";
-      logFile = HttpContext.Current.Server.MapPath(logFile);
+     string logFile = "~/App_Data/ErrorLog.txt";
+       //string logFile = "|DataDirectory|ErrorLog.txt";
+     logFile = System.Web.Hosting.HostingEnvironment.MapPath(logFile);
 
       // Open the log file for append and write the log
       StreamWriter sw = new StreamWriter(logFile, true);

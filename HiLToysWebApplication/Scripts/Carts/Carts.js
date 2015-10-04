@@ -139,21 +139,7 @@ function ConfirmDeleteLineItem(productID, productName,RecordId, currentLineItem)
 
     $("#DeleteConfirmationText").html("Are you sure you want to delete <b>" + productID + " - " + productName + "</b> from this order?");
 
-    /*$("#dialog-confirm").({
-        resizable: false,
-        height: 200,
-        width: 600,
-        modal: true,
-        buttons: {
-            "Delete line item": function () {
-                DeleteLineItem(productID, productName,RecordId, currentLineItem);
-                $(this).dialog("close");
-            },
-            Cancel: function () {
-                $(this).dialog("close");
-            }
-        }
-    });*/
+   
     DeleteLineItem(productID, productName, RecordId, currentLineItem);
 }
 function DeleteLineItem(productID, productName,recordId, currentLineItem) {
@@ -200,11 +186,7 @@ function GetCartCountComplete(results) {
     $('#cart-status').text('Cart (' + counter + ')');
 }
 $(document).ready(function () {
-    // Product.BindUIwithViewModel(Product.ViewModel);
-    //Product.RegisterUIEventHandlers();
-    // Product.IntializeLineItem(Product.ViewModel);
-    // $("#DeleteConfirmationText").b
-    // counter= $('#cart-status').text;
+   
     var InitialiceCartCount = 0;
     var url = "/Carts/GetCartCount";
 
