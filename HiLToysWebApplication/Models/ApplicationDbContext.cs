@@ -49,27 +49,27 @@ namespace HiLToysWebApplication.Models
         public DbSet<HiLToysDataModel.Models.Shipper> Shippers { get; set; }
        
     }
-    public class HiLToysApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
-    {
-        public HiLToysApplicationDbContext()
-            : base("HiLToysEMDModelContainer", throwIfV1Schema: false)
-        {
+    //public class HiLToysApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
+    //{
+    //    public HiLToysApplicationDbContext()
+    //        : base("HiLToysEMDModelContainer", throwIfV1Schema: false)
+    //    {
             
-        }
+    //    }
 
-        public static HiLToysApplicationDbContext Create()
-        {
-            return new HiLToysApplicationDbContext();
-        }
+    //    public static HiLToysApplicationDbContext Create()
+    //    {
+    //        return new HiLToysApplicationDbContext();
+    //    }
         
-        public IDbSet<HiLToysDataModel.Category> Categories { get; set; }
-        public IDbSet<HiLToysDataModel.Product> Products { get; set; }
-        public IDbSet<HiLToysDataModel.Cart> Carts { get; set; }
-        public IDbSet<HiLToysDataModel.Models.Order> Orders { get; set; }
-        public IDbSet<HiLToysDataModel.Models.OrderDetail> OrderDetails { get; set; }
-        public IDbSet<HiLToysDataModel.Models.Customer> Customers { get; set; }
-        public IDbSet<HiLToysDataModel.Models.Shipper> Shippers { get; set; }
-    }
+    //    public IDbSet<HiLToysDataModel.Category> Categories { get; set; }
+    //    public IDbSet<HiLToysDataModel.Product> Products { get; set; }
+    //    public IDbSet<HiLToysDataModel.Cart> Carts { get; set; }
+    //    public IDbSet<HiLToysDataModel.Models.Order> Orders { get; set; }
+    //    public IDbSet<HiLToysDataModel.Models.OrderDetail> OrderDetails { get; set; }
+    //    public IDbSet<HiLToysDataModel.Models.Customer> Customers { get; set; }
+    //    public IDbSet<HiLToysDataModel.Models.Shipper> Shippers { get; set; }
+    //}
     public class FakeApplicationDbContext : IApplicationDbContext
     {
         public IDbSet<HiLToysDataModel.Category> Categories { get; set; }

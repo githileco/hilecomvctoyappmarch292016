@@ -9,7 +9,7 @@ namespace HiLToysWebApplication.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             AutomaticMigrationDataLossAllowed = true;
             ContextKey = "HiLToysWebApplication.Models.ApplicationDbContext";
         }
