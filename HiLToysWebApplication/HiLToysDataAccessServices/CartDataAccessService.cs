@@ -56,9 +56,12 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
             Boolean added = true;
             int counter = 0;
             ShoppingCartId = cartViewModel.Cart.CartID;
-            var cartItem = storeDB.Carts.SingleOrDefault(
-            c => c.CartID == ShoppingCartId
-            && c.ProductID == cartViewModel.Cart.ProductID);
+            //var cartItem = storeDB.Carts.SingleOrDefault(
+            //c => c.CartID == ShoppingCartId
+            //&& c.ProductID == cartViewModel.Cart.ProductID);
+
+            var cartItem = storeDB.Database.SqlQuery<Cart>("SELECT* FROM Carts WHERE CartID=@ShoppingCartId AND ProductID=@ProductID", new SqlParameter("@ShoppingCartId", ShoppingCartId), new SqlParameter("@ProductID", cartViewModel.Cart.ProductID)).FirstOrDefault();
+
 
             if (cartItem == null)
             {
@@ -79,24 +82,35 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
                 };
 
                 storeDB.Carts.Add(cartItem);
-               // storeDB.Entry(cartItem).State = System.Data.Entity.EntityState.Modified;
+                // storeDB.Entry(cartItem).State = System.Data.Entity.EntityState.Modified;
+            
+               //   string sql="INSERT INTO Carts(CartID,RecordId,ProductID,ProductName,Quantity,UnitPrice,SubTotal,Count,DateCreated)VALUES(@CartID,@RecordId,@ProductID,@ProductName,@Quantity,@UnitPrice,@SubTotal,@Count,@DateCreated)";
+               //  List<SqlParameter> parameterlist=new List<SqlParameter>();
+               //  parameterlist.Add(new SqlParameter("@CartID",ShoppingCartId));
+               //      parameterlist.Add(new SqlParameter("@RecordId",Guid.NewGuid().ToString()));
+               //   parameterlist.Add(new SqlParameter("@ProductName",cartViewModel.Cart.ProductName));
+               //   parameterlist.Add(new SqlParameter("@Quantity",cartViewModel.Cart.Quantity));
+               //   parameterlist.Add(new SqlParameter("@UnitPrice",cartViewModel.Cart.UnitPrice));
+               //   parameterlist.Add(new SqlParameter("@SubTotal",cartViewModel.Cart.SubTotal));
+               //   parameterlist.Add(new SqlParameter("@Count",1));
+               //    parameterlist.Add(new SqlParameter("@DateCreated", DateTime.Now));
+               // SqlParameter[] parameters=parameterlist.ToArray();
+                   
+               //storeDB.Database.ExecuteSqlCommand(sql,parameters);
+            
+            
             }
             else
             {
                 // If the item does exist in the cart, then add one to the quantity
-               
+
                 int totqant = 0;
                 int count = 0;
                 count = cartItem.Count + 1;
                 totqant = cartItem.Quantity + cartViewModel.Cart.Quantity;
-                storeDB.Database.ExecuteSqlCommand("update Carts set Quantity = @qnt,Count=@count where ProductID =@Pid ", new SqlParameter("@Pid", cartItem.ProductID), new SqlParameter("@qnt", totqant), new SqlParameter("@count", count));
-                
-           
+                storeDB.Database.ExecuteSqlCommand("update Carts set Quantity = @qnt,Count=@count where ProductID =@Pid", new SqlParameter("@Pid", cartItem.ProductID), new SqlParameter("@qnt", totqant), new SqlParameter("@count", count));
+
             }
-
-
-
-            // Save changes
             storeDB.SaveChanges();
             counter = GetCount();
             if (counter == cartViewModel.Cart.Count)
@@ -204,6 +218,7 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
             ShoppingCartId = cartViewModel.Cart.CartID;
             rtncartViewModel.Cart.CartTotal = GetTotal();
             rtncartViewModel.Cart.Count = GetCount();
+            
             rtncartViewModel.Carts= storeDB.Database.SqlQuery<Cart>("SELECT* FROM Carts WHERE CartID = @ShoppingCartId", new SqlParameter("@ShoppingCartId", ShoppingCartId)).ToList();
             return rtncartViewModel;
 
