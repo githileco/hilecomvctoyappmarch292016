@@ -229,6 +229,10 @@
     <Compile Include="Logic\ExceptionUtility.cs" />
     <Compile Include="Logic\HostingEnviroment.cs" />
     <Compile Include="Logic\PayPalFunctions.cs" />
+    <Compile Include="Migrations\201510050830578_finalmvcmig.cs" />
+    <Compile Include="Migrations\201510050830578_finalmvcmig.Designer.cs">
+      <DependentUpon>201510050830578_finalmvcmig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -410,6 +414,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201510050830578_finalmvcmig.resx">
+      <DependentUpon>201510050830578_finalmvcmig.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
