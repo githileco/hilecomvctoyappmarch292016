@@ -56,11 +56,11 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
             Boolean added = true;
             int counter = 0;
             ShoppingCartId = cartViewModel.Cart.CartID;
-            //var cartItem = storeDB.Carts.SingleOrDefault(
-            //c => c.CartID == ShoppingCartId
-            //&& c.ProductID == cartViewModel.Cart.ProductID);
+            var cartItem = storeDB.Carts.SingleOrDefault(
+            c => c.CartID == ShoppingCartId
+            && c.ProductID == cartViewModel.Cart.ProductID);
 
-            var cartItem = storeDB.Database.SqlQuery<Cart>("SELECT* FROM Carts WHERE CartID=@ShoppingCartId AND ProductID=@ProductID", new SqlParameter("@ShoppingCartId", ShoppingCartId), new SqlParameter("@ProductID", cartViewModel.Cart.ProductID)).FirstOrDefault();
+            //var cartItem = storeDB.Database.SqlQuery<Cart>("SELECT* FROM Carts WHERE CartID=@ShoppingCartId AND ProductID=@ProductID", new SqlParameter("@ShoppingCartId", ShoppingCartId), new SqlParameter("@ProductID", cartViewModel.Cart.ProductID)).FirstOrDefault();
 
 
             if (cartItem == null)
@@ -218,8 +218,8 @@ namespace HiLToysWebApplication.HiLToysDataAccessServices
             ShoppingCartId = cartViewModel.Cart.CartID;
             rtncartViewModel.Cart.CartTotal = GetTotal();
             rtncartViewModel.Cart.Count = GetCount();
-            
-            rtncartViewModel.Carts= storeDB.Database.SqlQuery<Cart>("SELECT* FROM Carts WHERE CartID = @ShoppingCartId", new SqlParameter("@ShoppingCartId", ShoppingCartId)).ToList();
+
+            rtncartViewModel.Carts = storeDB.Database.SqlQuery<HiLToysDataModel.Cart>("SELECT* FROM Carts WHERE CartID = @ShoppingCartId", new SqlParameter("@ShoppingCartId", ShoppingCartId)).ToList();
             return rtncartViewModel;
 
         }
