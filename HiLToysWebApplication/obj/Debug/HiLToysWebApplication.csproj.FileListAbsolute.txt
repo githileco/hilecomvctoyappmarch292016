@@ -62,7 +62,6 @@ C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLTo
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\System.Web.WebPages.xml
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\System.Web.WebPages.Deployment.xml
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\bin\System.Web.WebPages.Razor.xml
-C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.finalmvcmig.resources
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.Migrations.carttotal.resources
 C:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\obj\Debug\HiLToysWebApplication.csproj.GenerateResource.Cache

@@ -113,8 +113,6 @@ function UpdateCartDetail(currentLineItem, rowIndex)
     
     updateLineItem.Quantity = currentLineItem.Quantity();
     
-    //updateLineItem.RowIndex = rowIndex;
-    //$("#DeleteConfirmationText").html(currentLineItem.ProductID());
 
     var url = "/Carts/UpdateCartDetailLineItem";
 
@@ -176,10 +174,22 @@ function DeleteLineItemComplete(results) {
     }
 
 }
-function ShowCheckoutHeader() {
-    $("#CartEdit #CartID").val($("#CartID").val());
-    $("#CheckoutEdit").submit();
-}
+//function ShowCheckoutComplete(results) {
+
+//    //viewModel.MessageBox(results.MessageBoxView);
+
+//    var x = results;
+
+//}
+//function ShowCheckoutHeader() {
+//    //$("#CartEdit #CartID").val($("#CartID").val());
+//    $("#CheckoutEdit").submit();
+//    //var url = "/Checkout/CheckoutStart";
+//    ////var postData = 0;
+
+//    //$.post(url);
+
+//}
 function GetCartCountComplete(results) {
     counter = results.TotalCatCount;
 

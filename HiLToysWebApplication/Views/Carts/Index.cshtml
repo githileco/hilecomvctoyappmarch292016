@@ -65,7 +65,6 @@
     </tr>
 </script>
 
-<form id="CheckoutEdit" method="post" action="/Checkout/CheckoutStart"></form>
 
 <div style="padding: 20px 10px 10px 10px">
     
@@ -74,12 +73,13 @@
 
 
 </div>
-
+<p class="button">
+    @Html.ActionLink("newCheckout >>", "CheckoutStart", "Checkout")
+</p>
 <span id="DeleteConfirmationText2"></span>
 
 <div id="MessageBox" data-bind="html: MessageBox"></div>
 
-<input id="btnCheckoutHeader" type="button" onclick="ShowCheckoutHeader()" value="Check Out" />
 
 
 <div id="cart-status">

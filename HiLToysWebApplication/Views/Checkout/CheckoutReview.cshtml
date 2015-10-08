@@ -175,13 +175,13 @@
 
 
 <div style="padding: 20px 10px 10px 10px;">
-    <input id="btnCartHeader" type="button" onclick="CheckoutConfirm()" value="Checkout Confirm" />
+    <p class="button">
+        @Html.ActionLink("Checkout Confirm >>", "CheckoutComplete", "Checkout")
+    </p>
 
 </div>
 <div id="MessageBox" data-bind="html: MessageBox"></div>
 
-
-<form id="CheckoutConfirm" method="post" action="/Checkout/CheckoutComplete"></form>
 
 
 <div id="cart-status">

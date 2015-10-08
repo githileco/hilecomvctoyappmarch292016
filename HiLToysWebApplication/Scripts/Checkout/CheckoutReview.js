@@ -223,9 +223,9 @@ function ProductIDEntered(element, e) {
 }*/
 
 
-function CheckoutConfirm() {
-    $("#CheckoutConfirm").submit();
-}
+//function CheckoutConfirm() {
+   // $("#CheckoutConfirm").submit();
+//}
 
 
 function GetCartCountComplete(results) {

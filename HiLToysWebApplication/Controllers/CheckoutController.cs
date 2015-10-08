@@ -16,7 +16,7 @@ namespace HiLToysWebApplication.Controllers
      [Authorize]
     public class CheckoutController : Controller
     {
-         private ApplicationDbContext db = new ApplicationDbContext();
+         //private ApplicationDbContext db = new ApplicationDbContext();
 
         //
         // GET: /Checkout/
