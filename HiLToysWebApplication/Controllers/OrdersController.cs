@@ -4,8 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HiLToysApplicationServices;
-//using HiLToysDataAccessServices;
-//using HiLToysWebApplication.HiLToysApplicationServices;
 using HiLToysViewModel;
 using HiLToysWebApplication.Models;
 namespace HiLToysWebApplication.Controllers

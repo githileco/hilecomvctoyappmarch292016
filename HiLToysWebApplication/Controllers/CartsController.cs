@@ -17,12 +17,10 @@ namespace HiLToysWebApplication.Controllers
         // GET: /Carts/
      public ActionResult Index()
      {
-         //Session["ShoppingCartItemsessionKey"] = "d7762014-92eb-468a-8ab5-e87c25a63915";
          CartApplicationService cartApplicationService = new CartApplicationService();
 
            var Cart = ShoppingCartActions.GetCart();
            string CartID = Cart.ShoppingCartId;
-         //string CartID = "7919";
 
             CartViewModel cartViewModel = new CartViewModel();
            cartViewModel = cartApplicationService.GetCarts(CartID);
@@ -44,7 +42,6 @@ namespace HiLToysWebApplication.Controllers
 
 
          cartViewModel.Cart.CartID = Cart.ShoppingCartId;
-         //cartViewModel.Cart.CartID = "5623";
          cartViewModel = cartApplicationService.GetCarts(Cart.ShoppingCartId);
         
         if (cartViewModel.Cart.CartTotal < 1)
@@ -52,7 +49,6 @@ namespace HiLToysWebApplication.Controllers
          else
              Session["payment_amt"] = cartViewModel.Cart.CartTotal;
         cartViewModel = cartApplicationService.GetCartCount(cartViewModel);
-       //ViewData["CartCount"] = cartViewModel.Cart.CartTotal;
       ViewData["CartCount"] = cartViewModel.Cart.Count;
 
          return PartialView("CartSummary");
@@ -76,7 +72,6 @@ namespace HiLToysWebApplication.Controllers
          var Cart = ShoppingCartActions.GetCart();
          cartViewModel.Cart.CartID = Cart.ShoppingCartId;
          cartViewModel = cartApplicationService.GetCartCount(cartViewModel);
-
          return Json(new
          {
              TotalCatCount = cartViewModel.Cart.Count
@@ -94,17 +89,8 @@ namespace HiLToysWebApplication.Controllers
             CartApplicationService cartApplicationService = new CartApplicationService();
             CartViewModel cartViewModel = new CartViewModel();
             var Cart = ShoppingCartActions.GetCart();
-            
             double subtotal = 99;
-            //cart.AddToCart(addedAlbum);
-
-            // Go back to the main store page for more shopping
-            //return RedirectToAction("Index");
-           // CartApplicationService cartApplicationService = new CartApplicationService();
-           // CartViewModel cartViewModel = new CartViewModel();
-
             cartViewModel.Cart.CartID = Cart.ShoppingCartId;
-          // cartViewModel.Cart.CartID = "5623";
 
             cartViewModel.Cart.ProductID = Convert.ToInt32(postedFormData["ProductID"]);
             cartViewModel.Cart.ProductName = Convert.ToString(postedFormData["ProductName"]);
@@ -117,12 +103,7 @@ namespace HiLToysWebApplication.Controllers
            // if (HiLToysBusinessServices.Utilities.ToDouble((postedFormData["SubTotal"])) == true)
                 //cartViewModel.Cart.SubTotal = Convert.ToDouble(postedFormData["SubTotal"]);
                 cartViewModel.Cart.SubTotal = subtotal;
-                //cartViewModel.Ca
             cartViewModel = cartApplicationService.AddCartDetailLineItem(cartViewModel);
-           // ProductViewModel productViewModel = new ProductViewModel();
-           // productViewModel.Cart.Count = cartViewModel.Cart.Count;
-           // ViewData["CartCount"] = cartViewModel.Cart.Count;
-           // productViewModel.ReturnStatus = cartViewModel.ReturnStatus;
             Session["payment_amt"] = cartViewModel.Cart.CartTotal;
             return Json(new
             {
@@ -137,21 +118,13 @@ namespace HiLToysWebApplication.Controllers
               CartApplicationService cartApplicationService = new CartApplicationService();
               CartViewModel cartViewModel = new CartViewModel();
 
-
-          //    CartApplicationService cartApplicationService = new CartApplicationService();
-      //      CartViewModel cartViewModel = new CartViewModel();
              var Cart = ShoppingCartActions.GetCart();
-           // string CartID = "7919";
             cartViewModel.Cart.CartID = Cart.ShoppingCartId;
-            //cartViewModel.Cart.CartID = CartID;
-             //string rowIndex = Convert.ToString(postedFormData["RowIndex"]);
             cartViewModel.Cart.ProductID = Convert.ToInt32(postedFormData["ProductID"]);
         //if (HiLToysBusinessServices.Utilities.IsNumeric((postedFormData["Quantity"])) == true)
                 cartViewModel.Cart.Quantity = Convert.ToInt32(postedFormData["Quantity"]);
                
-                //cartViewModel.Cart.
               cartViewModel = cartApplicationService.UpdateCartDetailLineItem(cartViewModel);
-              //cartViewModel.TotalCarts = cartViewModel.Cart.CartTotal;
                Session["payment_amt"]=cartViewModel.Cart.CartTotal;
               return Json(new
               {
@@ -167,7 +140,6 @@ namespace HiLToysWebApplication.Controllers
         {
             CartApplicationService cartApplicationService = new CartApplicationService();
             CartViewModel cartViewModel = new CartViewModel();
-            //string CartID = "7919";
            var Cart = ShoppingCartActions.GetCart();
            cartViewModel.Cart.CartID = Cart.ShoppingCartId; 
             cartViewModel.Cart.ProductID = Convert.ToInt32(postedFormData["ProductID"]);
@@ -176,10 +148,6 @@ namespace HiLToysWebApplication.Controllers
             cartViewModel.Cart.RecordId = Convert.ToString(postedFormData["RecordId"]);
 
             cartViewModel = cartApplicationService.DeleteCartDetailLineItem(cartViewModel);
-           // if (cartViewModel.ReturnStatus==true)
-             //{
-                // RedirectToAction("ResetCartSummary");
-             //}
             Session["payment_amt"] = cartViewModel.Cart.CartTotal;
 
            return Json(new
