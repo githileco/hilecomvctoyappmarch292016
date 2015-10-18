@@ -76,7 +76,7 @@ using HiLToysDataModel;
 
 
             string returnURL = "http://ethiohilecomvctoysapp2017.apphb.com/Checkout/CheckoutReview";
-            string cancelURL = " http://ethiohilecomvctoysapp2017.apphb.com/Checkout/CheckoutCancel";
+            string cancelURL = "http://ethiohilecomvctoysapp2017.apphb.com/Checkout/CheckoutCancel";
 
 
             NVPCodec encoder = new NVPCodec();
