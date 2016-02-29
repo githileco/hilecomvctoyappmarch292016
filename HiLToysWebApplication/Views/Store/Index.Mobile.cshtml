@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+
+
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <title>Retina - Free CSS template by ChocoTemplates.com</title>
+
+
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+@*<div class="view-switcher ui-bar-a" align="center">
+
+        <ul id="menumobcategory">
+
+            <li class="view-switcher ui-bar-a">
+                @Html.ActionLink("Cars", "Browse", "Store", new { Category = "Cars" }, htmlAttributes: new { @class = "mobcustom" })
+            </li>
+            <li class="view-switcher ui-bar-a">
+                @Html.ActionLink("Planes", "Browse", "Store", new { Category = "Planes" }, htmlAttributes: new { @class = "mobcustom" })
+            </li>
+            <li class="view-switcher ui-bar-a">
+                @Html.ActionLink("Trucks", "Browse", "Store", new { Category = "Trucks" }, htmlAttributes: new { @class = "mobcustom" })
+            </li>
+            <li class="view-switcher ui-bar-a">
+                @Html.ActionLink("Boats", "Browse", "Store", new { Category = "Boats" }, htmlAttributes: new { @class = "mobcustom" })
+            </li>
+            <li class="view-switcher ui-bar-a">
+                @Html.ActionLink("Rockets", "Browse", "Store", new { Category = "Rockets" }, htmlAttributes: new { @class = "mobcustom" })
+            </li>
+
+        </ul>
+
+    </div>*@
+
+<body>
+    <!-- wrapper -->
+    <div id="wrapper">
+        <!-- shell -->
+        <div class="shell">
+            <!-- container -->
+            <div class="container">
+                <div class="main">
+                    <div class="featured" style="height:auto">
+                        <h4>Welcome to <strong>Tmwaga.</strong> Start Shopping in our Website Today completely for <strong>DISCOUNT!</strong></h4>
+                        @Html.ActionLink("Cars", "Browse", "Store", new { Category = "Cars" }, htmlAttributes: new { @class = "blue-btn" })
+                        @Html.ActionLink("Planes", "Browse", "Store", new { Category = "Planes" }, htmlAttributes: new { @class = "blue-btn" })
+                        @Html.ActionLink("Trucks", "Browse", "Store", new { Category = "Trucks" }, htmlAttributes: new { @class = "blue-btn" })
+                        @Html.ActionLink("Boats", "Browse", "Store", new { Category = "Boats" }, htmlAttributes: new { @class = "blue-btn" })
+                        @Html.ActionLink("Rockets", "Browse", "Store", new { Category = "Rockets" }, htmlAttributes: new { @class = "blue-btn" })
+
+                    </div>
+                    <div id="cart-status" style="visibility: hidden">
+
+                    </div>
+                </div>
+                <!-- end of main -->
+                <div class="cl">&nbsp;</div>
+            </div>
+            <!-- end of container -->
+        </div>
+        <!-- end of shell -->
+    </div>
+    <!-- end of wrapper -->
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <link rel="shortcut icon" type="~/Content/Retina/css/image/x-icon" href="~/Content/Retina/css/images/favicon.ico" />
+    <link rel="stylesheet" href="~/Content/Retina/css/style.css" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,900,800,700,600,500,300,200,100' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript">
+        var counter = 0;
+
+        function GetCartCountComplete(results) {
+            counter = results.TotalCatCount;
+
+            $('#cart-status').text('Cart (' + counter + ')');
+        }
+        $(document).ready(function () {
+
+            var InitialiceCartCount = 0;
+            var url = "/Carts/GetCartCount";
+
+            $.post(url, InitialiceCartCount, function (results, textStatus) {
+                GetCartCountComplete(results);
+            });
+
+
+
+        });
+
+    </script>
+}
+
+
+</body>
+</html>

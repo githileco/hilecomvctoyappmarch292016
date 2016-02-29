@@ -1,0 +1,145 @@
+﻿@using System.Collections;
+@using System.Collections.Generic;
+@using Newtonsoft.Json;
+@using System.Collections;
+@model HiLToysViewModel.ProductViewModel
+@{
+    ViewBag.Title = "Product Detail";
+
+    ArrayList productDetails = new ArrayList();
+
+    foreach (var item in Model.Products)
+    {
+        if (item.ProductID > 0)
+        {
+            var cartDetail = new
+            {
+                ProductID = item.ProductID.ToString(),
+                ProductName = item.ProductName,
+                UnitPrice = item.UnitPrice,
+                SupplierID = item.SupplierID,
+                CategoryID = item.CategoryID,
+                QuantityPerUnit = item.QuantityPerUnit,
+                UnitsInStock = item.UnitsInStock,
+                UnitsOnOrder = item.UnitsOnOrder,
+                ReorderLevel = item.ReorderLevel,
+                Discontinued = item.Discontinued,
+                Description = item.Description,
+                ImagePath = item.ImagePath
+            };
+
+            productDetails.Add(cartDetail);
+        }
+    }
+}
+<!-- Products -->
+@*<div class="products">
+
+        <ul>
+            <li>
+                <a href="#"><img id="list1img" src="/Content/chocolate/images/big1.jpg" alt="" /></a>
+                <div class="product-info">
+                    <h3>HiLToys</h3>
+                    <div class="product-desc">
+                        <h4 id="list1titleh4"></h4>
+                        <p id="li1paragraph1PName"></p>
+                        <p class="price">Amount</p>
+                       <div id="li1paragraph1PPrice" class="price" style="font:900"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#"><img src="/Content/chocolate/images/big1.jpg" alt="" /></a>
+                <div class="product-info">
+                    <h3>LOREM IPSUM</h3>
+                    <div class="product-desc">
+                        <h4>WOMEN’S</h4>
+                        <p>Lorem ipsum dolor sit<br />amet</p>
+                        <strong class="price">$58.99</strong>
+                    </div>
+                </div>
+            </li>
+            <li class="last">
+                <a href="#"><img src="/Content/chocolate/images/big1.jpg" alt="" /></a>
+                <div class="product-info">
+                    <h3>LOREM IPSUM</h3>
+                    <div class="product-desc">
+                        <h4>WOMEN’S</h4>
+                        <p>Lorem ipsum dolor sit<br />amet</p>
+                        <strong class="price">$58.99</strong>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="cl">&nbsp;</div>
+    </div>*@
+@*<div class="box search">
+        <h2>Search by <span></span></h2>
+        <div class="box-content">
+
+        </div>
+    </div>*@
+<!-- End Products -->
+
+        <div id="center">
+    <div id="discount">
+        <img src="/Content/Fashion/images/discount.png" alt="" width="121" height="119" border="0" usemap="#Map" class="transparent" />
+        <map name="Map">
+            <area alt="vb" shape="circle" coords="61,57,55" href="#">
+        </map>
+    </div>
+    <div id="photo">
+        <img src="/Content/Fashion/images/tpart.png" alt="" width="49" height="23" class="transparent" /><br />
+        <div class="text">
+            <p><span>Lorem ipsum</span> - dolor sit amet, sectetu adip scing varius interdum incid unt quis, libero. Aenean mturpis. </p>
+            <p>Maecenas hendrerit masa<br /> laoreet iaculipede mnisl ulam-<br /> corper. Tellus er sodales enim,<br /> in tincidunt mauris in odio. Massa<br /> ac laoreet iaculipede nisl<br /> ulla mcorpermassa, </p>
+        </div>
+    </div>
+    <div id="items" data-bind='template: {name: "CartDetailTemplate", foreach:LineItems}'>
+
+    </div>
+
+</div>
+   
+
+        <!--====== Template ======-->
+        <script type="text/html" id="CartDetailTemplate">
+
+            <div class="item">
+                <h5 data-bind="text: ProductName "></h5>
+                <div class="itemimage">
+                    <a href="#"><img data-bind="attr:{src:ImagePath},event:{click:$parent.DetailLineItem($data)}" alt="" width="150" height="159" /></a><br />
+                    <p class="more"><a href="#">more info</a></p>
+                </div>
+                <div class="price">
+                    <p><span class="new">price</span><span data-bind="text: UnitPrice" class="old"></span></p><br />
+                    <p><span class="new">Quantity:</span><span class="old"></span></p><br />
+                    <input type="text" data-bind="value: Quantity,valueUpdate:'input'" style="width: 30px" />
+                    <form action="#" class="button">
+                        <a href="#"><img src="images/buy.jpg" alt="" width="53" height="23" /></a><br />
+                        <input type="button" data-bind="click: function() { viewModel.AddLineItem($data) }" value="Add To Cart" />
+                    </form>
+                </div>
+            </div>
+
+
+        </script>
+
+        <div id="MessageBox" data-bind="html: MessageBox"></div>
+        <div id="DeleteConfirmationText"></div>
+
+        <div id="cart-status">
+        </div>
+
+
+
+        @section scripts{
+            @Scripts.Render("~/bundles/jqueryui")
+            <script src="~/Scripts/knockout-3.1.0.js"></script>
+            <script src="~/Scripts/knockout.mapping-latest.js"></script>
+            <script src="~/Scripts/Store/Product.js"></script>
+            @*@Styles.Render("~/Content/Site.css")*@
+            <script type="text/javascript">
+                viewModel.IntializeLineItem(@Html.Raw(JsonConvert.SerializeObject(productDetails, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })));
+            </script>
+        }

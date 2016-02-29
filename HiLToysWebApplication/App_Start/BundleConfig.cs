@@ -39,7 +39,8 @@ namespace HiLToysWebApplication
                    bundles.Add(new StyleBundle("~/Content/css").Include(
                              "~/Content/bootstrap.css",
                              "~/Content/site.css"));
-   
+                   bundles.Add(new StyleBundle("~/Content/mobilecss").Include("~/Content/jquery.mobile*"));
+                   bundles.Add(new ScriptBundle("~/bundles/jquerymobile").Include("~/Scripts/jquery.mobile*"));
             bundles.Add(new ScriptBundle("~/bundles/WebFormsJs").Include(
                             "~/Scripts/WebForms/WebForms.js",
                             "~/Scripts/WebForms/WebUIValidation.js",
@@ -49,6 +50,13 @@ namespace HiLToysWebApplication
                             "~/Scripts/WebForms/DetailsView.js",
                             "~/Scripts/WebForms/TreeView.js",
                             "~/Scripts/WebForms/WebParts.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Retinajs").Include(
+                            "~/Scripts/Retina/js/function.js",
+                             "~/Scripts/jquery-1.8.0.min.js",
+                            "~/Scripts/Retina/js/jquery.carouFredSel-5.5.0-packed.js",
+                            "~/Scripts/Retina/js/jquery.carouFredSel-6.2.1-packed.js",
+                            "~/Scripts/Retina/js/modernizr.custom.js"
+                           ));
 
             // Order is very important for these files to work, they have explicit dependencies
             bundles.Add(new ScriptBundle("~/bundles/MsAjaxJs").Include(

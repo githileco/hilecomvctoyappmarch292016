@@ -7,3 +7,246 @@ Stack Trace:
    at System.Net.HttpWebRequest.GetRequestStream()
    at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\ahmed\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 216
 
+********** 10/31/2015 2:32:30 PM **********
+Exception Type: System.Net.WebException
+Exception: The operation has timed out
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in d:\Users\tmwgawin7sp1\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 10/31/2015 3:46:34 PM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in d:\Users\tmwgawin7sp1\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/1/2015 11:39:47 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in d:\Users\tmwgawin7sp1\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/1/2015 11:41:01 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in d:\Users\tmwgawin7sp1\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/1/2015 11:41:05 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in d:\Users\tmwgawin7sp1\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/1/2015 11:41:55 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in d:\Users\tmwgawin7sp1\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/1/2015 11:42:37 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in d:\Users\tmwgawin7sp1\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/1/2015 11:42:44 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in d:\Users\tmwgawin7sp1\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/20/2015 5:01:27 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/20/2015 5:01:36 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 11/20/2015 5:01:48 AM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/22/2016 11:49:50 AM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/22/2016 11:50:36 AM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/22/2016 11:59:38 AM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/22/2016 12:00:25 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/22/2016 12:00:53 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/22/2016 12:23:49 PM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/22/2016 12:24:06 PM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/22/2016 12:27:56 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/23/2016 1:44:02 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/23/2016 1:46:00 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/23/2016 1:52:50 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/23/2016 1:55:06 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/23/2016 2:08:06 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/23/2016 2:14:29 PM **********
+Exception Type: System.Net.WebException
+Exception: The remote name could not be resolved: 'api-3t.sandbox.paypal.com'
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/23/2016 2:20:16 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+
+********** 2/23/2016 2:20:27 PM **********
+Exception Type: System.Net.WebException
+Exception: The request was aborted: Could not create SSL/TLS secure channel.
+Source: HttpCall in PayPalFunction.cs
+Stack Trace: 
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at NVPAPICaller.HttpCall(String NvpRequest) in c:\Users\tmwaga\Documents\Visual Studio 2013\Projects\HiLToysWebApplication\HiLToysWebApplication\Logic\PayPalFunctions.cs:line 222
+

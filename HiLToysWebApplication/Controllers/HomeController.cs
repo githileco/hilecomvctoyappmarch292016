@@ -10,7 +10,8 @@ namespace HiLToysWebApplication.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Store");
+
         }
 
         public ActionResult About()

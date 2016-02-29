@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNet.Identity
+@*@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
+    }
+}
+else
+{
+
+
+     <ul id="menumobcategory">
+                 <li class="view-switcher ui-bar-a">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "mobcustom" })</li>
+                 <li class="view-switcher ui-bar-a">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "mobcustom" })</li>
+      </ul>
+
+   
+
+
+}*@
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul>
+            @*<li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>*@
+            <li></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+
+    <ul>
+        <li></li>
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@*<link rel="shortcut icon" type="~/Content/Retina/css/image/x-icon" href="~/Content/Retina/css/images/favicon.ico" />
+<link rel="stylesheet" href="~/Content/Retina/css/style.css" type="text/css" media="all" />*@
+
+}

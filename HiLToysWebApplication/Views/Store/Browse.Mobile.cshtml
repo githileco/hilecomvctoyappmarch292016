@@ -1,0 +1,299 @@
+﻿@model HiLToysViewModel.ProductViewModel
+@{
+    ViewBag.Title = "Mobile View : Products";
+    //  DisplayModes.RequireConsistentDisplayMode = false;
+
+}
+
+@*<div class ="view-switcher ui-bar-a">
+    <ul data-role="listview">
+        @foreach (var product in Model.Products)
+{
+    var x = "1";
+
+    <li class="view-switcher ui-bar-a">
+
+        <div>
+            <p><strong>Product Name :</strong>@product.ProductName</p>
+
+            @if (!string.IsNullOrEmpty(product.ImagePath))
+            {
+                <p> <img alt="@product.ImagePath" src="/Catalog/Images/Thumbs/@(product.ImagePath).png" style="border:solid; height:75px;width:75px" /></p>
+            }
+            
+            <div style="float:left; height:25px; width:48px; text-align:left;" class="field-label">Price:</div>
+            <div>@product.UnitPrice</div>
+            <div style="clear:both;"></div>
+                <div class="editor-label">
+                    @Html.Label("Quantity")
+                </div>
+                <p>
+                    @Html.TextBox("quant", x, new Dictionary<String, Object>() { { "class", "textBox" } })
+                </p>
+                <p>
+                    @Ajax.ActionLink("Add to cart", "AddToCart", "Store", new { ProductID = product.ProductID, ProductName = product.ProductName, UnitPrice = product.UnitPrice, Quantity = x.ToString() }, new AjaxOptions
+            {
+
+                OnSuccess = "onEditCompleted"
+            })
+                </p>
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">Go to Detail</li>
+                    @Html.ActionLink("Details", "Store", new { id = product.ProductID })
+                </ul>
+            </div>
+
+        <p></p>
+    </li>
+
+}
+    </ul>
+</div>
+    <div id="cart-status">
+
+    </div>
+    @section scripts{
+        @Scripts.Render("~/bundles/jqueryui")
+        <script src="~/Scripts/knockout-3.1.0.js"></script>
+        <script src="~/Scripts/knockout.mapping-latest.js"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.js")">
+        </script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")">
+        </script>
+        
+        <script type="text/javascript">
+            var counter = 0;
+            function onEditCompleted(results, textStatus) {
+                if (results.ReturnStatus == true) {
+                    counter = counter + 1;
+                    $('#cart-status').text('Cart (' + counter + ')');
+                };
+            }
+            function GetCartCountComplete(results) {
+                counter = results.TotalCatCount;
+
+                $('#cart-status').text('Cart (' + counter + ')');
+            }
+            $(document).ready(function () {
+
+                var InitialiceCartCount = 0;
+                var url = "/Carts/GetCartCount";
+
+                $.post(url, InitialiceCartCount, function (results, textStatus) {
+                    GetCartCountComplete(results);
+                });
+
+                //viewModel.RegisterUIEventHandlers();
+
+
+            });
+
+        </script>
+    }*@
+ 
+<div class="slider-holder">
+   
+    <!-- slider -->
+    <div class="slider">
+        @*<div class="socials">
+                <a href="#" class="facebook-ico">facebook-ico</a>
+                <a href="#" class="twitter-ico">twitter-ico</a>
+                <a href="#" class="skype-ico">skype-ico</a>
+                <a href="#" class="rss-ico">rss-ico</a>
+                <div class="cl">&nbsp;</div>
+            </div>*@
+        <div class="arrs">
+            <a href="#" class="prev-arr"></a>
+            <a href="#" class="next-arr"></a>
+        </div>
+        @*<ul data-bind='template: {name: "CartDetailTemplate", foreach:LineItems}'>
+            
+
+        </ul>*@
+       
+        <ul>
+            <li id="img1">
+                <div class="slide-cnt">
+                    <h4>Heading Title </h4>
+                    <h2>MVC HiLToys Online Shop</h2>
+                    <p>Acor porta mi, non venenatis augue imperdiet quis. Nam faucibus, felis ut suscipit vulputate, tortor quam ultricies neque, eget dignissim elit urna a metus. Aliquam sed quam dui, id lacinia nunc. <a href="#">read more</a></p>
+                </div>
+                <img src="/Content/Retina/css/images/mac-img.png" alt="" />
+            </li>
+            @foreach (var product in Model.Products)
+            {
+                var x = "1";
+               <li id=@product.ProductID>
+               <div class="slide-cnt">
+               <h4><strong>Product Name :</strong>@product.ProductName</h4>
+               <h2>@product.ProductName</h2>
+               <p>Price: @product.UnitPrice</p>
+               <p>Quantity:&nbsp;&nbsp;@Html.TextBox("quant", x, new Dictionary<String, Object>() { { "class", "cartentrytextBox" } })</p>
+               <p>
+                @Ajax.ActionLink("Add to cart", "AddToCart", "Store", new { ProductID = product.ProductID, ProductName = product.ProductName, UnitPrice = product.UnitPrice, Quantity = x.ToString() }, new AjaxOptions
+                {
+
+                    OnSuccess = "onEditCompleted"
+                })
+               </p>
+
+        </div>
+        <img alt="@product.ImagePath" src="/Catalog/Images/Thumbs/@(product.ImagePath).png" />
+    </li>
+}
+
+           @* <li id="img3">
+        <div class="slide-cnt">
+            <h4>Heading Title Goes</h4>
+            <h2>Just Like That cars</h2>
+            <p>Acor porta mi, non venenatis augue imperdiet quis. Nam faucibus, felis ut suscipit vulputate, tortor quam ultricies neque, eget dignissim elit urna a metus. Aliquam sed quam dui, id lacinia nunc. <a href="#">read more</a></p>
+        </div>
+        <img src="/Content/Retina/css/images/mac-img.png" alt="" />
+    </li>
+    <li id="img4">
+        <div class="slide-cnt">
+            <h4>Heading Title Goes</h4>
+            <h2>Just Like That cars </h2>
+            <p>Acor porta mi, non venenatis augue imperdiet quis. Nam faucibus, felis ut suscipit vulputate, tortor quam ultricies neque, eget dignissim elit urna a metus. Aliquam sed quam dui, id lacinia nunc. <a href="#">read more</a></p>
+        </div>
+        <img src="/Content/Retina/css/images/mac-img.png" alt="" />
+    </li>
+    <li id="img5">
+        <div class="slide-cnt">
+            <h4>Heading Title Goes</h4>
+            <h2>Just Like That cars</h2>
+            <p>Acor porta mi, non venenatis augue imperdiet quis. Nam faucibus, felis ut suscipit vulputate, tortor quam ultricies neque, eget dignissim elit urna a metus. Aliquam sed quam dui, id lacinia nunc. <a href="#">read more</a></p>
+        </div>
+        <img src="/Content/Retina/css/images/mac-img.png" alt="" />
+    </li>
+    <li id="img6">
+        <div class="slide-cnt">
+            <h4>Heading Title Goes</h4>
+            <h2>Just Like That</h2>
+            <p>Acor porta mi, non venenatis augue imperdiet quis. Nam faucibus, felis ut suscipit vulputate, tortor quam ultricies neque, eget dignissim elit urna a metus. Aliquam sed quam dui, id lacinia nunc. <a href="#">read more</a></p>
+        </div>
+        <img src="/Content/Retina/css/images/mac-img.png" alt="" />
+    </li>
+    <li id="img7">
+        <div class="slide-cnt">
+            <h4>Heading Title Goes</h4>
+            <h2>Just Like That cars </h2>
+            <p>Acor porta mi, non venenatis augue imperdiet quis. Nam faucibus, felis ut suscipit vulputate, tortor quam ultricies neque, eget dignissim elit urna a metus. Aliquam sed quam dui, id lacinia nunc. <a href="#">read more</a></p>
+        </div>
+        <img src="/Content/Retina/css/images/mac-img.png" alt="" />
+    </li>
+    <li id="img8">
+        <div class="slide-cnt">
+            <h4>Heading Title Goes</h4>
+            <h2>Just Like That</h2>
+            <p>Acor porta mi, non venenatis augue imperdiet quis. Nam faucibus, felis ut suscipit vulputate, tortor quam ultricies neque, eget dignissim elit urna a metus. Aliquam sed quam dui, id lacinia nunc. <a href="#">read more</a></p>
+        </div>
+        <img src="/Content/Retina/css/images/mac-img.png" alt="" />
+    </li>*@
+        </ul>
+</div>
+    <!-- slider-end -->
+    <!-- thumbs -->
+    <div id="thumbs-wrapper">
+        <div id="thumbs">
+            <a href="#img1" class="selected"><img src="css/images/thumb.png" /></a>
+            <a href="#img2"><img src="/Content/Retina/css/images/thumb2.png" /></a>
+            <a href="#img3"><img src="/Content/Retina/css/images/thumb3.png" /></a>
+            <a href="#img4"><img src="/Content/Retina/css/images/thumb4.png" /></a>
+            <a href="#img5"><img src="/Content/Retina/css/images/thumb.png" /></a>
+            <a href="#img6"><img src="/Content/Retina/css/images/thumb2.png" /></a>
+            <a href="#img7"><img src="/Content/Retina/css/images/thumb3.png" /></a>
+            <a href="#img8"><img src="/Content/Retina/css/images/thumb4.png" /></a>
+        </div>
+        <a id="prev" href="#"></a>
+        <a id="next" href="#"></a>
+    </div>
+    <!-- end of thumbs -->
+
+    </div>
+<!-- end slider-holder -->
+
+<!--====== Template ======-->
+
+
+    <!-- end of slider -->
+    <div id="cart-status" style="visibility: hidden">
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryui")
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+<script src="~/Scripts/knockout.mapping-latest.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")">
+</script>
+   @Scripts.Render("~/bundles/Retinajs")
+<script type="text/javascript">
+    var counter = 0;
+    function onEditCompleted(results, textStatus) {
+        if (results.ReturnStatus == true) {
+            counter = counter + 1;
+            $('#cart-status').text('Cart (' + counter + ')');
+        };
+    }
+    function GetCartCountComplete(results) {
+        counter = results.TotalCatCount;
+
+        $('#cart-status').text('Cart (' + counter + ')');
+    }
+    $(document).ready(function () {
+
+        var InitialiceCartCount = 0;
+        var url = "/Carts/GetCartCount";
+
+        $.post(url, InitialiceCartCount, function (results, textStatus) {
+            GetCartCountComplete(results);
+        });
+
+        //viewModel.RegisterUIEventHandlers();
+
+
+    });
+
+</script>
+@*<script src="~/Scripts/knockout-3.1.0.js"></script>
+<script src="~/Scripts/knockout.mapping-latest.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.js")">
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")">
+</script>
+
+<script type="text/javascript">
+    var counter = 0;
+    function onEditCompleted(results, textStatus) {
+        if (results.ReturnStatus == true) {
+            counter = counter + 1;
+            $('#cart-status').text('Cart (' + counter + ')');
+        };
+    }
+    function GetCartCountComplete(results) {
+        counter = results.TotalCatCount;
+
+        $('#cart-status').text('Cart (' + counter + ')');
+    }
+    $(document).ready(function () {
+
+        var InitialiceCartCount = 0;
+        var url = "/Carts/GetCartCount";
+
+        $.post(url, InitialiceCartCount, function (results, textStatus) {
+            GetCartCountComplete(results);
+        });
+
+        //viewModel.RegisterUIEventHandlers();
+
+
+    });
+
+</script>*@
+
+
+
+
+
+}

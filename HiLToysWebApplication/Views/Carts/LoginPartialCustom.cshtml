@@ -1,0 +1,98 @@
+﻿@using HiLToysWebApplication.Models
+@model LoginViewModel
+@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    <div id="rightlogin">
+    <div id="loginx" class="entry">
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @*<ul class="nav navbar-nav navbar-right">
+                <li>
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>*@
+        <div style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #BDBDBD; text-decoration: none; line-height: 22px;">@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })&nbsp;<div><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></div> </div>
+    }
+        </div>
+    </div>
+}
+else
+{
+    <div id="rightlogin" >
+        @*<h4 class="title2">Use a local account To log in </h4>*@
+
+        <div id="loginx" class="entry">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginfrm", @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @*<h4>Use a local account to log in.</h4>
+                    <hr />*@
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="form-group">
+
+                            <input type="submit" style="width: 40px; height: 23px; margin: 12px 0 10px 0; cursor: pointer; display: block; " value="Log in" />
+
+                        </div>
+                    </div>
+
+                </div>
+                <p>
+                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                    <a href="#"><img src="/Content/Fashion/images/enter.jpg" alt="" width="52" height="23" /></a>
+                </p>
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+
+            }
+
+        </div>
+
+    </div>
+
+}
+    @section scripts{
+        @Scripts.Render("~/bundles/jqueryval")
+        @*<script src="~/Scripts/knockout-3.1.0.js"></script>
+        <script src="~/Scripts/knockout.mapping-latest.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#loginx").hide = false;
+
+            });
+        </script>*@
+    }

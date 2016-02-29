@@ -1,0 +1,38 @@
+﻿@model HiLToysViewModel.ProductViewModel
+    @{
+    ViewBag.Title = "Details";
+    
+}
+
+<h2>Details</h2>
+
+@{
+    ViewBag.Title = "Product - " + Model.Product.ProductName;
+}
+
+<h2>@Model.Product.ProductName</h2>
+
+@using (Html.BeginForm("Add To Cart","CreateCart", "Carts", FormMethod.Post, new { id = "createGenreForm" }))
+{
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Product.ProductName)
+        
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Product.UnitPrice)
+        
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Product.Description)
+        
+    </div>
+    <div class="editor-label">
+            @Html.Label("Quantity")
+        </div>
+    <div class="editor-field">
+       @Html.TextBox("Quantityin")
+    </div>
+    
+    @Html.ViewData["CartCount"];
+}

@@ -75,6 +75,8 @@ using HiLToysDataModel;
             }
 
 
+           // string returnURL = "http://localhost:49168/Checkout/CheckoutReview";
+           // string cancelURL = "http://localhost:49168/Checkout/CheckoutCancel";
             string returnURL = "http://ethiohilecomvctoysapp2017.apphb.com/Checkout/CheckoutReview";
             string cancelURL = "http://ethiohilecomvctoysapp2017.apphb.com/Checkout/CheckoutCancel";
 

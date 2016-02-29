@@ -65,6 +65,19 @@ function CreateLineItem(LineItem) {
     lineItem.EditMode = ko.observable(true);
     lineItem.DisplayMode = ko.observable(true);
     lineItem.DisplayCancelSaveButtons = ko.observable(true);
+    //if (lineItem.CategoryID = 1) {
+
+    //    $("#list1titleh4").html("cars"); 
+    //    $("#li1paragraph1PName").html(lineItem.ProductName());
+    //    $("#li1paragraph1PPrice").html(lineItem.UnitPrice());
+    //}
+    //else if (lineItem.CategoryID = 2)
+    //{
+    //    $("#list1titleh4").html("");
+    //    $("#list1titleh4").html("planes");
+    //    $("#li1paragraph1PName").html(lineItem.ProductName());
+    //    $("#li1paragraph1PPrice").html(lineItem.UnitPrice());
+    //}
     return lineItem;
 
 }

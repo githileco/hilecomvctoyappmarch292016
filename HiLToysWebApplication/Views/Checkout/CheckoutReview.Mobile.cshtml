@@ -1,0 +1,270 @@
+﻿@using System.Collections;
+@using System.Collections.Generic;
+@using Newtonsoft.Json;
+@model HiLToysViewModel.OrderViewModel
+@{
+    ViewBag.Title = "Order Entry Detail";
+
+    ArrayList orderDetails = new ArrayList();
+
+    foreach (var item in Model.OrderDetailProductResults)
+    {
+        var orderDetail = new
+        {
+            ProductID = item.ProductID,
+            ProductName = item.ProductName,
+            Quantity = item.Quantity,
+            UnitPrice = item.UnitPrice,
+            QuantityPerUnit = item.QuantityPerUnit,
+            Discount = item.Discount
+
+
+
+        };
+
+        orderDetails.Add(orderDetail);
+    }
+
+
+}
+
+
+<div id="cartdetail">
+    <h2 style="color:red"><strong>ORDER ENTRY DETAIL</strong></h2>
+    <div class="cartdetail-cols">
+        <div class="col">
+            <ul>
+                <li><p><span class="new">Order Number :</span><span class="spanstyle">@Model.OrderDetailProductResults[0].OrderID</span></p></li>
+                <li><p><span class="new">Customer ID :</span><span class="spanstyle">@Model.OrderDetailProductResults[0].CustomerID</span></p></li>
+                <li><p><span class="new">Order Date :</span><span class="spanstyle">@Model.OrderDetailProductResults[0].OrderDate.ToShortDateString()</span></p></li>
+                <li><p><span class="new">First Name :</span><span class="spanstyle">@Model.OrderDetailProductResults[0].FirstName</span></p></li>
+                <li><p><span class="new">Last Name :</span><span class="spanstyle">@Model.OrderDetailProductResults[0].LastName</span></p></li>
+
+            </ul>
+        </div>
+        <div class="col" data-bind='template: {name: "OrderDetailTemplate", foreach:LineItems}'>
+            
+         </div>
+        <div class="col">
+            <h2 style="color: red; font-size: 21px;"><strong>ADDRESS</strong></h2>
+            <ul>
+                <li><p><span class="new">Ship To Name :</span><span class="spanstyle">@Model.Order.ShipName</span></p></li>
+                <li><p><span class="new">Ship To Address :</span><span class="spanstyle">@Model.Order.ShipAddress</span></p></li>
+                <li><p><span class="new">Ship To City :</span><span class="spanstyle">@Model.Order.ShipCity</span></p></li>
+                <li><p><span class="new">Ship To Region :</span><span class="spanstyle">@Model.Order.ShipRegion</span></p></li>
+                <li><p><span class="new">Postal Code :</span> <spanclass ="spanstyle">@Model.Order.ShipPostalCode</span></p></li>
+                <li><p><span class="new">Ship To country :</span><span class="spanstyle">@Model.Order.ShipCountry</span></p></li>
+
+            </ul>
+        </div>
+        <div class="col">
+            <h2 style="color: red; font-size: 21px;width:190px">TOTAL RESULTS</h2>
+            <ul>
+                <li><p><span class="new"><strong>Total Order(Cart):</strong></span><span style="color: #7dc33a; font-size: 16px; padding-bottom: 4px; padding-left: 9px; height: auto;">@Model.TotalOrders</span></p></li>
+                <li><p><span class="new"><strong>Total Order(PayPal):</strong></span><span style="color: #7dc33a; font-size: 16px; padding-bottom: 4px; padding-left: 9px; height: auto;">@Model.Order.OrderTotal</span></p></li>
+
+                <li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p class="button">
+                        @Html.ActionLink("Checkout-Confirm", "CheckoutComplete", "Checkout")
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+    
+    
+</div>
+<!--====== Container ======-->
+@*<table>
+
+    <tbody data-bind='template: {name: "OrderDetailTemplate", foreach: LineItems}'> </tbody>
+</table>*@
+
+
+
+
+       <div id="OrderDetailsData" style="visibility: hidden; display: none">
+            @Html.Raw(Json.Encode(orderDetails));
+        </div>
+
+        @Html.Hidden("OrderID", Model.OrderDetailProductResults[0].OrderID)
+        <!--====== Template ======-->
+        @*<script type="text/html" id="OrderDetailTemplate">
+
+
+                <tr>
+                    <td style="color:red"><strong>ProductName:</strong></td>
+                    <td><div data-bind="text: ProductName"></div></td>
+                </tr>
+                <tr>
+                    <td><strong>ProductID:</strong></td>
+                    <td><div data-bind="text: ProductID"></div></td>
+                </tr>
+                <tr>
+                    <td><strong>UnitPrice:</strong></td>
+                    <td><div data-bind="text: UnitPrice"></div></td>
+                </tr>
+                <tr>
+                    <td><strong>Quantity:</strong></td>
+                    <td><div data-bind="text: Quantity"></div></td>
+                </tr>
+                <tr>
+                    <td><strong>QuantityPerUnit:</strong></td>
+                    <td><div data-bind="text: QuantityPerUnit"></div></td>
+                </tr>
+
+            </script>*@
+
+ <script type="text/html" id="OrderDetailTemplate">
+            
+                @*<h2 data-bind="text: ProductName"></h2>*@
+                <ul>
+                    <li class="productnameurl"><p><span class="new"><strong>ProductName :&nbsp;</strong></span><span data-bind="text:ProductName" style="color:red; font-style:italic;font-size: 16px; padding-bottom: 4px; padding-right: 9px; height: auto; width: 227px"></span></p></li>
+                    <li><p><span class="new">ProductID :</span><span data-bind="text:ProductID" class="spanstyle"></span></p></li>
+                    <li><p><span class="new">UnitPrice :</span><span data-bind="text:UnitPrice" class="spanstyle"></span></p></li>
+                    <li><p><span class="new">Quantity :</span><span data-bind="text:Quantity" class="spanstyle"></span></p></li>
+                    <li><p><span class="new">QuantityPerUnit :</span><span data-bind="text:QuantityPerUnit" class="spanstyle"></span></p></li>
+                </ul>
+ 
+   </script>
+
+     
+        @Html.Hidden("CustomerID", @Model.Customer.CustomerID)
+        @Html.Hidden("OrderID", @Model.Order.OrderID)
+        @Html.Hidden("OriginalShipName", @Model.Order.ShipName, new Dictionary<string, object> { { "data-bind", "value: OriginalShipName" } })
+        @Html.Hidden("OriginalShipAddress", @Model.Order.ShipAddress, new Dictionary<string, object> { { "data-bind", "value: OriginalShipAddress" } })
+        @Html.Hidden("OriginalShipCity", @Model.Order.ShipCity, new Dictionary<string, object> { { "data-bind", "value: OriginalShipCity" } })
+        @Html.Hidden("OriginalShipRegion", @Model.Order.ShipRegion, new Dictionary<string, object> { { "data-bind", "value: OriginalShipRegion" } })
+        @Html.Hidden("OriginalShipPostalCode", @Model.Order.ShipPostalCode, new Dictionary<string, object> { { "data-bind", "value: OriginalShipPostalCode" } })
+        @Html.Hidden("OriginalShipCountry", @Model.Order.ShipCountry, new Dictionary<string, object> { { "data-bind", "value: OriginalShipCountry" } })
+        @Html.Hidden("OriginalRequiredDate", @Model.Order.RequiredDate.ToShortDateString(), new Dictionary<string, object> { { "data-bind", "value: OriginalRequiredDate" } })
+        @Html.Hidden("OriginalShipVia", @Model.Order.ShipVia, new Dictionary<string, object> { { "data-bind", "value: OriginalShipVia" } })
+        @Html.Hidden("ShipperName", @Model.Order.ShipperName)
+
+       
+        <div id="MessageBox" data-bind="html: MessageBox"></div>
+
+        <div id="cart-status" style="visibility: hidden">
+
+        </div>
+
+        @section scripts{
+            <script src="~/Scripts/knockout-3.1.0.js"></script>
+            <script src="~/Scripts/knockout.mapping-latest.js"></script>
+            <script>
+
+                var initialLineItems = "";
+
+                var counter = 0;
+                var lineItemDisplay = function () {
+
+                    this.ProductID;
+                    this.ProductName;
+                    this.Quantity;
+                    this.UnitPrice;
+                    this.QuantityPerUnit;
+                    this.Discount;
+                    // this.OriginalQuantity;
+                    // this.OriginalDiscount;
+                    this.EditMode;
+                    this.DisplayMode;
+                    //this.ReadOnlyMode;
+                    this.DisplayDeleteEditButtons;
+                    this.DisplayCancelSaveButtons;
+                };
+
+                // Overall viewmodel for this screen, along with initial state
+                var viewModel = {
+
+                    LineItems: ko.observableArray(),
+                    EditFields: ko.observable(false),
+                    MessageBox: ko.observable(),
+                    SetBackgroundColor: function (currentLineItemData) {
+                        var rowIndex = this.LineItems.indexOf(currentLineItemData);
+                        var colorCode = rowIndex % 2 == 0 ? "White" : "WhiteSmoke";
+                        return colorCode;
+                    },
+                    IntializeLineItem: function (datajsn) {
+                        IntializeLineItem(datajsn);
+                    },
+                    OrderID: ko.observable($("#OrderID").val()),
+                    BindUIwithViewModel: function (viewModel) {
+                        ko.applyBindings(viewModel);
+                    }
+
+                };
+
+                function IntializeLineItem(viewModeljson) {
+
+                    initialLineItems = viewModeljson;
+                    for (i = 0; i < initialLineItems.length; i++) {
+                        var newLineItem = CreateLineItem(initialLineItems[i]);
+                        viewModel.LineItems.push(newLineItem);
+
+                    }
+                }
+
+
+                function CreateLineItem(LineItem) {
+
+                    var lineItem = new lineItemDisplay();
+
+                    lineItem.ProductID = ko.observable(LineItem.ProductID);
+                    lineItem.ProductName = ko.observable(LineItem.ProductName);
+                    lineItem.Quantity = ko.observable(LineItem.Quantity);
+                    lineItem.UnitPrice = ko.observable(LineItem.UnitPrice);
+                    lineItem.QuantityPerUnit = ko.observable(LineItem.QuantityPerUnit);
+                    lineItem.Discount = ko.observable(LineItem.Discount);
+                    lineItem.BackgroundColor = ko.observable(LineItem.BackgroundColor);
+                    lineItem.EditMode = ko.observable(false);
+                    lineItem.DisplayMode = ko.observable(true);
+                    lineItem.DisplayDeleteEditButtons = ko.observable(true);
+                    lineItem.DisplayCancelSaveButtons = ko.observable(false);
+
+                    return lineItem;
+
+                }
+
+
+
+                function LineItem() {
+                    this.OrderID;
+                    this.ProductID;
+                    this.Quantity;
+                    this.Discount;
+                    this.RowIndex;
+                }
+
+
+
+                function CheckoutConfirm() {
+                    $("#CheckoutConfirm").submit();
+                }
+
+
+                function GetCartCountComplete(results) {
+                    counter = results.TotalCatCount;
+
+                    $('#cart-status').text('Cart (' + counter + ')');
+                }
+                function InitialiceCart() {
+
+                    var InitialiceCartCount = 0;
+                    var url = "/Carts/GetCartCount";
+
+                    $.post(url, InitialiceCartCount, function (results, textStatus) {
+                        GetCartCountComplete(results);
+                    });
+
+                    //viewModel.RegisterUIEventHandlers();
+                    viewModel.BindUIwithViewModel(viewModel);
+                    //viewModel.ReadOnlyMode(true);
+
+                }
+                InitialiceCart();
+                viewModel.IntializeLineItem(@Html.Raw(JsonConvert.SerializeObject(orderDetails, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })));
+            </script>
+        }

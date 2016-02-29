@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using HiLToysWebApplication.Models;
+using HiLToysViewModel;
+using HiLToysApplicationServices;
 
 namespace HiLToysWebApplication.Controllers
 {
@@ -42,11 +44,28 @@ namespace HiLToysWebApplication.Controllers
 
         //
         // GET: /Account/Login
+               // public ActionResult Login(string returnUrl)
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            //CartApplicationService cartApplicationService = new CartApplicationService();
+
+            //var Cart = ShoppingCartActions.GetCart();
+            //string CartID = Cart.ShoppingCartId;
+
+            //CartViewModel cartViewModel = new CartViewModel();
+            //cartViewModel = cartApplicationService.GetCarts(CartID);
+            //if (cartViewModel.Cart.CartTotal < 1)
+            //    Session["payment_amt"] = null;
+            //else
+            //    Session["payment_amt"] = cartViewModel.Cart.CartTotal;
+
+           // return View("Index", cartViewModel);
+            //return RedirectToAction("Index", "Home");
+            //return PartialView("Login");
+           return View();
         }
         private void MigrateShoppingCart(string UserName)
         {
@@ -456,7 +475,7 @@ namespace HiLToysWebApplication.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Store");
         }
 
         //

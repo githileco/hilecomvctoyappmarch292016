@@ -1,5 +1,4 @@
-﻿
-@using System.Collections;
+﻿@using System.Collections;
 @using System.Collections.Generic;
 @using Newtonsoft.Json;
 @using System.Collections;
@@ -10,7 +9,7 @@
     ArrayList cartDetails = new ArrayList();
     foreach (var item in Model.Carts)
     {
-        if (item.CartID !="")
+        if (item.CartID != "")
         {
             var cartDetail = new
             {
@@ -18,81 +17,113 @@
                 ProductName = item.ProductName,
                 UnitPrice = item.UnitPrice,
                 Quantity = item.Quantity,
-               RecordId=item.RecordId
+                RecordId = item.RecordId
 
             };
 
             cartDetails.Add(cartDetail);
-            
+
         }
     }
-    
+
 }
 
-<h4>Cart Entry Detail</h4>
 
-<!--====== Container ======-->
-<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
-    <tr class="DataGridHeader">
-        <td colspan="1">Product ID</td>
-        <td colspan="1">Product Name</td>
-        <td colspan="1">Unit Price</td>
-        <td colspan="1">Quantity</td>
-        <td colspan="1">Delete</td>
-    </tr>
-    <tbody data-bind='template: {name: "CartDetailTemplate", foreach:LineItems}'> </tbody>
-</table>
+   
+        <div id="center" class="cartentry">
+    <table border="0" cellpadding="0" cellspacing="0" style="width:65%">
 
-<!--====== Template ======-->
-<script type="text/html" id="CartDetailTemplate">
+        <tr class="cartheader">
 
-    <tr>
-        <td><div data-bind="text: ProductID"></div></td>
-        <td>
-            <div data-bind="text: ProductName"></div>
-         </td>
-        <td>
-            <div data-bind="text: UnitPrice"></div>
-        </td>
-        <td>
-          <input type="text" data-bind="value: Quantity,event:{change: $parent.UpdateLineItem($data)}" style="width: 50px" />
-        </td>
-        <td>
-            <div data-bind="visible: DisplayDeleteEditButtons">
-                <div style="width:25px; float:left"><img alt="delete" data-bind="click: function() { viewModel.DeleteLineItem($data) }" title="Delete item" src="@Url.Content("~/Content/Images/icon-delete.gif")" /></div>
+            <td style=" height: 64px; font-weight: bold; color: #FF5216; ">Product ID</td>
+            <td style=" height: 64px; font-weight: bold; color: #FF5216; ">Product Name</td>
+            <td style=" height: 64px; font-weight: bold; color: #FF5216;">Unit Price</td>
+            <td style=" height: 64px; font-weight: bold; color: #FF5216;">Quantity</td>
+            <td style="height: 64px; font-weight: bold; color: #FF5216;">Delete</td>
+        </tr>
+        <tbody style="color: #BDBDBD;" data-bind='template: {name: "CartDetailTemplate", foreach:LineItems}'> </tbody>
+    </table>
+            <div style="color: #BDBDBD; padding: 20px 10px 10px 10px">
+
+                <span id="dDiscontinued">&nbsp;Total Cart:</span>
+                <span id="TotalCarts">&nbsp; @Model.Cart.CartTotal</span>
+
             </div>
-        </td>
-    </tr>
-</script>
+            <div class="row">
+                <div class="col-md-8">
 
+                    @using (Html.BeginForm("CheckoutStart", "Checkout", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+                    {
 
-<div style="padding: 20px 10px 10px 10px">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="form-group">
+                                    <input type="submit" value="Checkout" />
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+            <span id="DeleteConfirmationText2"></span>
+            <div id="MessageBox" data-bind="html: MessageBox"></div>
+
+            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #BDBDBD; text-decoration: none; line-height: 22px;" id="cart-status">
+
+            </div>
+
+</div>
     
-    <span id="dDiscontinued">&nbsp;Total Cart:</span>
-    <span id="TotalCarts">&nbsp; @Model.Cart.CartTotal</span>
+
+            @*<section id="PeepsList">
+
+                ====== Container ======
+                <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                    <tr class="DataGridHeader">
+                        <td colspan="1">Product ID</td>
+                        <td colspan="1">Product Name</td>
+                        <td colspan="1">Unit Price</td>
+                        <td colspan="1">Quantity</td>
+                        <td colspan="1">Delete</td>
+                    </tr>
+                    <tbody data-bind='template: {name: "CartDetailTemplate", foreach:LineItems}'> </tbody>
+                </table>*@
+
+                <!--====== Template ======-->
+                <script type="text/html" id="CartDetailTemplate">
 
 
-</div>
-<p class="button">
-    @Html.ActionLink("Checkout >>", "CheckoutStart", "Checkout")
-</p>
-<span id="DeleteConfirmationText2"></span>
+                    <tr>
+                        <td><div data-bind="text: ProductID"></div></td>
+                        <td>
+                            <div data-bind="text: ProductName"></div>
+                        </td>
+                        <td>
+                            <div data-bind="text: UnitPrice"></div>
+                        </td>
+                        <td>
+                            <input type="text" data-bind="value: Quantity,event:{change: $parent.UpdateLineItem($data)}" style="width: 50px" />
+                        </td>
+                        <td>
+                            <div data-bind="visible: DisplayDeleteEditButtons">
+                                <div style="width:25px; float:left"><input type="button" data-bind="click: function() { viewModel.DeleteLineItem($data) }" value="Delete" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                </script>
+                
 
-<div id="MessageBox" data-bind="html: MessageBox"></div>
-
-
-
-<div id="cart-status">
-  
-</div>
-@section scripts{
-    @Scripts.Render("~/bundles/jqueryui")
-    <script src="~/Scripts/knockout-3.1.0.js"></script>
-    <script src="~/Scripts/knockout.mapping-latest.js"></script>
-    <script src="~/Scripts/Carts/Carts.js"></script>
-    <script type="text/javascript">
-        viewModel.IntializeLineItem(@Html.Raw(JsonConvert.SerializeObject(cartDetails, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })));
-    </script>
-}
-
-
+                
+            @*</section>*@
+            @section scripts{
+                @Scripts.Render("~/bundles/jqueryui")
+                <script src="~/Scripts/knockout-3.1.0.js"></script>
+                <script src="~/Scripts/knockout.mapping-latest.js"></script>
+                <script src="~/Scripts/Carts/Carts.js"></script>
+                <script type="text/javascript">
+                    viewModel.IntializeLineItem(@Html.Raw(JsonConvert.SerializeObject(cartDetails, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })));
+                </script>
+            }

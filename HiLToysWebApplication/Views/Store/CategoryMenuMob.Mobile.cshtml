@@ -1,0 +1,19 @@
+﻿@model IEnumerable<HiLToysDataModel.Category>
+@{
+    ViewBag.Title = "All Categories";
+    //  DisplayModes.RequireConsistentDisplayMode = false;
+}
+
+<h2>Categories</h2>
+
+<ul data-role="listview">
+    @foreach (var category in Model)
+    {
+        <li>
+            @Html.ActionLink(category.CategoryName,
+                "Browse", "Store",
+                new { Category = category.CategoryName }, null)
+        </li>
+    }
+</ul>
+

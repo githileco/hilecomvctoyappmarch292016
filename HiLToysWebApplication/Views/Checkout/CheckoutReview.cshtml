@@ -25,7 +25,7 @@
         orderDetails.Add(orderDetail);
     }
 
-   
+
 }
 
 <h4>Order Entry Detail</h4>
@@ -57,14 +57,8 @@
         <td style="width:10%">Discount</td>
     </tr>
     <tbody data-bind='template: {name: "OrderDetailTemplate", foreach: LineItems}'> </tbody>
+   
 </table>
-
-
-
-<div style="float:left; width:850px; height:25px; text-align:right;" class="field-label">Total Order(Cart):&nbsp;</div>
-<div style="float: right; height: 25px; ">&nbsp;@Model.TotalOrders</div>
-
-
 
 <div id="OrderDetailsData" style="visibility: hidden; display: none">
     @Html.Raw(Json.Encode(orderDetails));
@@ -94,71 +88,45 @@
                 <input type="text" data-bind="value: Discount" style="width:50px" />
             </div>
         </td>
-        
+
     </tr>
 
 </script>
-<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Name:&nbsp;</div>
-<div style="float:left; width:300px; height:25px; ">
-    &nbsp;
-    
-        @Html.TextBox("ShipName", @Model.Order.ShipName)
-   
-</div>
+<fieldset>
+    <table cellpadding="0" cellspacing="0" style="width:80%">
+        <tr>
+            <td style="width: 30%;">
+                <div style=" text-align: left;" class="field-label">Ship To Name:&nbsp;<strong> @Model.Order.ShipName</strong></div>
+                <div style=" text-align:left;" class="field-label">Ship To Address:&nbsp;<strong> @Model.Order.ShipAddress</strong></div>
+                <div style=" text-align:left;" class="field-label">Ship To City:&nbsp;<strong> @Model.Order.ShipCity</strong></div>
+                <div style=" text-align:left;" class="field-label">Ship To Region:&nbsp;<strong> @Model.Order.ShipRegion</strong></div>
+                <div style=" text-align:left;" class="field-label">Ship To Postal Code:&nbsp;<strong> @Model.Order.ShipPostalCode</strong></div>
+                <div style=" text-align:left;" class="field-label">Ship To Country:&nbsp;<strong> @Model.Order.ShipCountry</strong></div>
+                       
+            </td>
 
-<div style="clear:both;"></div>
+            <td style="width: 30%;color:red">
+                <div style="text-align: left;" class="field-label">Order Total(PayPal):&nbsp;<strong> @Model.Order.OrderTotal</strong></div>
+                <div style="text-align: left;" class="field-label">Total Order(Cart):&nbsp;<strong> @Model.TotalOrders</strong></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 35%;"></td>
+            <td style="width: 35%;">
+                @using (Html.BeginForm("CheckoutComplete", "Checkout", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+                {
 
-<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Address:&nbsp;</div>
-<div style="float:left; height:25px; width:300px;">
-    &nbsp;
+                    <div class="form-group">
+                        <input type="submit" value="Confirm" class="btn btn-default" />
+                    </div>
 
-    @Html.TextBox("ShipAddress", @Model.Order.ShipAddress)
-</div>  
-<div style="clear:both;"></div>
+                }
+            </td>
+        </tr>
 
-<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To City:&nbsp;</div>
-<div style="float:left; height:25px; width:300px;">
-    &nbsp;
-    
-        @Html.TextBox("ShipCity", @Model.Order.ShipCity)
-    
-</div>
+    </table>
+</fieldset>
 
-<div style="clear:both;"></div>
-
-<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Region:&nbsp;</div>
-<div style="float:left; height:25px; width:300px; ">
-    &nbsp;
-   
-        @Html.TextBox("ShipRegion", @Model.Order.ShipRegion)
-    
-</div>
-
-<div style="clear:both;"></div>
-<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Postal Code:&nbsp;</div>
-<div style="float:left; height:25px; width:300px; ">
-    &nbsp;
-    
-        @Html.TextBox("ShipPostalCode", @Model.Order.ShipPostalCode)
-    
-</div>
-
-<div style="clear:both;"></div>
-
-<div style="float:left; height:25px; width:150px; text-align:right;" class="field-label">Ship To Country:&nbsp;</div>
-<div style="float:left; height:25px; width:300px; ">
-    &nbsp;
-    
-        @Html.TextBox("ShipCountry", @Model.Order.ShipCountry)
-   
-</div>
-
-
-
-<div style="clear:both; padding: 5px">&nbsp;</div>
-
-<div style="float:left;  width:150px; height:25px; text-align:right;" class="field-label">Order Total(PayPal):&nbsp;</div>
-<div style="float:left;  width:400px; height:25px; font-weight:bold; ">&nbsp;@Model.Order.OrderTotal</div>
 
 @Html.Hidden("CustomerID", @Model.Customer.CustomerID)
 @Html.Hidden("OrderID", @Model.Order.OrderID)
@@ -174,12 +142,6 @@
 
 
 
-<div style="padding: 20px 10px 10px 10px;">
-    <p class="button">
-        @Html.ActionLink("Checkout Confirm >>", "CheckoutComplete", "Checkout")
-    </p>
-
-</div>
 <div id="MessageBox" data-bind="html: MessageBox"></div>
 
 
@@ -190,8 +152,8 @@
 
 @section scripts{
     <script src="~/Scripts/knockout-3.1.0.js"></script>
-<script src="~/Scripts/knockout.mapping-latest.js"></script>
-<script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script>
 
         var initialLineItems = "";
 
@@ -233,7 +195,7 @@
             }
 
         };
-       
+
         function IntializeLineItem(viewModeljson) {
 
             initialLineItems = viewModeljson;
@@ -274,7 +236,7 @@
             this.Discount;
             this.RowIndex;
         }
-        
+
 
 
         function CheckoutConfirm() {
@@ -304,4 +266,4 @@
         InitialiceCart();
         viewModel.IntializeLineItem(@Html.Raw(JsonConvert.SerializeObject(orderDetails, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })));
     </script>
-    }
+}

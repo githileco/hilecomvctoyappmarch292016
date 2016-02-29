@@ -31,6 +31,22 @@ namespace HiLToysWebApplication.Controllers
 
             return View("Index", cartViewModel);
     }
+//[ChildActionOnly]
+     public ActionResult LoginPartialCustom()
+          
+     {
+         return PartialView("LoginPartialCustom");
+}
+     public ActionResult LoginPartialCustom2()
+     {
+         ProductApplicationService productApplicationService = new ProductApplicationService();
+
+         ProductViewModel productViewModel = new ProductViewModel();
+         productViewModel.Products = productApplicationService.GetProducts().Products;
+        // return View("Index", St);
+         //return RedirectToAction("Index", "Store");
+         return PartialView("LoginPartialCustom2", productViewModel);
+     }
      [ChildActionOnly]
      public ActionResult CartSummary()
           
@@ -77,6 +93,47 @@ namespace HiLToysWebApplication.Controllers
              TotalCatCount = cartViewModel.Cart.Count
 
          });
+     }
+     public ActionResult AddToCart(int ProductID, string ProductName,double UnitPrice, string Quantity)
+     {
+         Int32 CartCount = 0;
+         CartCount = Convert.ToInt32(ViewData["CartCount"]);
+         CartCount = CartCount + 1;
+         ViewData["CartCount"] = CartCount;
+
+         // Add it to the shopping cart
+         CartApplicationService cartApplicationService = new CartApplicationService();
+         CartViewModel cartViewModel = new CartViewModel();
+         var Cart = ShoppingCartActions.GetCart();
+         double subtotal = 99;
+         cartViewModel.Cart.CartID = Cart.ShoppingCartId;
+
+         cartViewModel.Cart.ProductID = ProductID;
+         cartViewModel.Cart.ProductName = ProductName;
+
+         // if (HiLToysBusinessServices.Utilities.IsNumeric((postedFormData["Quantity"])) == true)
+         cartViewModel.Cart.Quantity = Convert.ToInt32(Quantity);
+
+         // if (HiLToysBusinessServices.Utilities.ToDecimal((postedFormData["UnitPrice"])) == true)
+         cartViewModel.Cart.UnitPrice = UnitPrice;
+         // if (HiLToysBusinessServices.Utilities.ToDouble((postedFormData["SubTotal"])) == true)
+         //cartViewModel.Cart.SubTotal = Convert.ToDouble(postedFormData["SubTotal"]);
+         cartViewModel.Cart.SubTotal = subtotal;
+         cartViewModel = cartApplicationService.AddCartDetailLineItem(cartViewModel);
+         return PartialView("CartSummary");
+        
+         /*
+         // Retrieve the album from the database
+         var addedAlbum = storeDB.Albums
+             .Single(album => album.AlbumId == id);
+
+         // Add it to the shopping cart
+         var cart = ShoppingCart.GetCart(this.HttpContext);
+
+         cart.AddToCart(addedAlbum);
+
+         // Go back to the main store page for more shopping
+         return RedirectToAction("Index");*/
      }
       
         // GET: /Carts/Details/5
@@ -133,7 +190,7 @@ namespace HiLToysWebApplication.Controllers
                   xtotal=cartViewModel.Cart.CartTotal,
                                    //ValidationErrors = cartViewModel.ValidationErrors,
   //                MessageBoxView = Helpers.MvcHelpers.RenderPartialView(this, "_MessageBox", cartViewModel),
-              });
+              },JsonRequestBehavior.AllowGet);
 
           }
          public ActionResult DeleteCartDetailLineItem(FormCollection postedFormData)

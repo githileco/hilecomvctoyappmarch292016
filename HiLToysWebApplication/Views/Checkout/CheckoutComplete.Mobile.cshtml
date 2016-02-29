@@ -1,0 +1,15 @@
+﻿@model HiLToysViewModel.CheckoutViewModel
+@{
+    ViewBag.Title = "CheckoutComplete";
+}
+
+<h1>Checkout Completion Mobile</h1>
+<p>
+    <em>Congratulations! Your payment confirmation number is:</em>
+    @Model.PayementConfirmationNo
+ </p>
+
+<p>
+    How about shopping for some more product in our
+    @Html.ActionLink("store", "Index", "Store")
+</p>

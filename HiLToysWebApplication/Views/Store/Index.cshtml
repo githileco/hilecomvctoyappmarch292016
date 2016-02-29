@@ -25,136 +25,78 @@
                 ReorderLevel = item.ReorderLevel,
                 Discontinued = item.Discontinued,
                 Description = item.Description,
-             ImagePath=  item.ImagePath
-           };
+                ImagePath = item.ImagePath
+            };
 
             productDetails.Add(cartDetail);
+
         }
     }
 }
 
-<section id="PeepsForm">
-    <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
-        <tr>
-            <td style="width:10%; height:25px"><span id="dProductID">Product Id:</span></td>
-            <td style="width:10%; height:25px"><span id="ProductID">Product Id</span></td>
-       </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dProductName">Product name:</span></td>
-            <td style="width:10%; height:25px"><span id="ProductName">Product name</span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dSupplierID">SupplierID:</span></td>
-            <td style="width:10%; height:25px"><span id="SupplierID" style=" height:25px; width:48px; text-align:right;">SupplierID</span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dCategoryID">CategoryID:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="CategoryID" style=" height:25px; width:48px; text-align:right;">CategoryID</span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dUnitPrice">UnitPrice:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="UnitPrice" style=" height:25px; width:48px; text-align:right;"></span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dQuantityPerUnit">QuantityPerUnit:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="QuantityPerUnit" style=" height:25px; width:48px; text-align:right;"></span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dUnitsInStock">UnitsInStock:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="UnitsInStock"></span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dUnitsOnOrder">UnitsOnOrder:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="UnitsOnOrder"></span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dReorderLevel">ReorderLevel:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="ReorderLevel"></span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dDiscontinued">Discontinued:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="Discontinued"></span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dDescription">Description:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="Description"></span></td>
-        </tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="dQuantity">Quantity:&nbsp;</span></td>
-            <td style="width:10%; height:25px"><span id="NewQuantity"><input type="text" id="txtNewQuantity" style="width: 50px" /></span></td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-            <td style="width:10%; height:25px"><span id="Newaddtocart"><input id="addtocart" type="button" value="Add To Cart" /></span></td>
-        </tr>
-    </table>
-</section>
-    <section id="PeepsList">
 
-        <!--====== Container ======-->
-        <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
-            <tr>
-                <td style="width:10%; height:25px"></td>
-                <td style="width:10%; height:25px"></td>
-                <td style="width:10%; height:25px"></td>
-            </tr>
-            <tbody data-bind='template: {name: "CartDetailTemplate", foreach:LineItems}'> </tbody>
-        </table>
-
-        <!--====== Template ======-->
-        <script type="text/html" id="CartDetailTemplate">
-
-            <tr>
-                <td>
-                    <div style="width:25px; float:left"><img data-bind="attr:{src:ImagePath},event:{click:$parent.DetailLineItem($data)}" /></div>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-
-                <td><div data-bind="text: ProductID "></div></td>
-
-                <td>
-
-
-                    <div data-bind="text: ProductName "></div>
-                    <div style="clear:both;"></div>
-
-                    <div style="float:left; height:25px; width:48px; text-align:left;" class="field-label">Price:</div>
-                    <div data-bind="text: UnitPrice"></div>
-                    <div style="clear:both;"></div>
-                    <div style="float:left; height:25px; width:50px; text-align:right;" class="field-label">Quantity:&nbsp;</div>
-                    // <div>&nbsp; <input type="text" data-bind="value: Quantity,valueUpdate:'input'" style="width: 50px" /></div>
-                    <div style="clear:both;"></div>
-
-                    <div data-bind="visible: DisplayCancelSaveButtons">
-                        <div style="width:25px; float:left"><img alt="save" data-bind="click: function() { viewModel.AddLineItem($data) }" title="Save item" src="@Url.Content("~/Content/Images/icon-floppy.gif")" /></div>
-                    </div>
-                </td>
-
-            </tr>
-
-        </script>
-
-        <div id="MessageBox" data-bind="html: MessageBox"></div>
-        <div id="DeleteConfirmationText"></div>
-
-        <div id="cart-status">
+<div id="center">
+    <div id="discount">
+        <img src="/Content/Fashion/images/discount.png" alt="" width="121" height="119" border="0" usemap="#Map" class="transparent" />
+        <map name="Map">
+            <area alt="vb" shape="circle" coords="61,57,55" href="#">
+        </map>
+    </div>
+    <div id="photo">
+        <img src="/Content/Fashion/images/tpart.png" alt="" width="49" height="23" class="transparent" /><br />
+        <div class="text">
+            <p><span>Lorem ipsum</span> - dolor sit amet, sectetu adip scing varius interdum incid unt quis, libero. Aenean mturpis. </p>
+            <p>Maecenas hendrerit masa<br /> laoreet iaculipede mnisl ulam-<br /> corper. Tellus er sodales enim,<br /> in tincidunt mauris in odio. Massa<br /> ac laoreet iaculipede nisl<br /> ulla mcorpermassa, </p>
         </div>
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </section>
+    </div>
+    <div id="items" data-bind='template: {name: "CartDetailTemplate", foreach:LineItems}'>
 
-    @section scripts{
-        @Scripts.Render("~/bundles/jqueryui")
-        <script src="~/Scripts/knockout-3.1.0.js"></script>
-        <script src="~/Scripts/knockout.mapping-latest.js"></script>
-        <script src="~/Scripts/Store/Product.js"></script>
-        @Styles.Render("~/Content/Site.css")
-        <script type="text/javascript">
+    </div>
+
+</div>
+
+
+<!--====== Container ======-->
+<!--====== Template ======-->
+<script type="text/html" id="CartDetailTemplate">
+
+    <div class="item">
+        
+            <h5 data-bind="text: ProductName "></h5>
+       
+        <div class="itemimage">
+            <a href="#"><img data-bind="attr:{src:ImagePath},event:{click:$parent.DetailLineItem($data)}" alt="" width="150" height="159" /></a><br />
+            <p class="more"><a href="#">more info</a></p>
+        </div>
+        <div class="price">
+            <p><span class="new">price</span><span data-bind="text: UnitPrice" class="old"></span></p><br />
+            <p><span class="new">Quantity:</span><span class="old"></span></p><br />
+            <input type="text" data-bind="value: Quantity,valueUpdate:'input'" style="width: 30px" />
+            <form action="#" class="button">
+                <a href="#"><img src="images/buy.jpg" alt="" width="53" height="23" /></a><br />
+                <input type="button" data-bind="click: function() { viewModel.AddLineItem($data) }" value="Add To Cart" />
+            </form>
+        </div>
+    </div>
+
+
+</script>
+
+<div id="MessageBox" data-bind="html: MessageBox"></div>
+<div id="DeleteConfirmationText"></div>
+
+<div id="cart-status">
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/Store/Product.js"></script>
+    @*@Styles.Render("~/Content/Site.css")*@
+    <script type="text/javascript">
             viewModel.IntializeLineItem(@Html.Raw(JsonConvert.SerializeObject(productDetails, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })));
-        </script>
-    }
+    </script>
+}
